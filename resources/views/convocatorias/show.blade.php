@@ -802,6 +802,39 @@
                 </table>
             </div>
         @endcan
+        {{-- Tabla de calificaciones por convocatoria --}}
+        <div>
+            <h4><strong>Tabla de calificaciones</strong></h4>
+            <table class="table table-sm table-hover table-bordered">
+                <thead class="thead-light">
+                    <tr>
+                        <th class="text-center">
+                            <strong>Nombre del postulante</strong>
+                        </th>
+                        <th class="text-center">
+                            <strong>Apellido del postulante</strong>
+                        </th>
+                        <th class="text-center">
+                            <strong>Fecha de subscripcion</strong>
+                        </th>
+                        <th class="text-center">
+                            <strong>Puntaje Final</strong>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{-- Postulaciones --}}
+                    @foreach ($convocatoria->postulations as $postulation)
+                        <tr class="orange lighten-4">
+                            <td>{{$postulation->user->name}}</td>
+                            <td>{{$postulation->user->apellido}}</td>
+                            <td>{{$postulation->created_at}}</td>
+                            <td>{{$postulation->puntaje_total}}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </article>
 </div>
 @endsection
