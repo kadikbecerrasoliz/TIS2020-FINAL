@@ -8,6 +8,7 @@ use App\Postulation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ConvocatoriaRequest;
+use Carbon\Carbon;
 
 class ConvocatoriaController extends Controller
 {
@@ -70,7 +71,8 @@ class ConvocatoriaController extends Controller
 
     public function view()
     {
-        $convocatorias = Convocatoria::orderBy('titulo')->get();
+        $today = Carbon::now();
+        $convocatorias = Convocatoria::orderBy('titulo')->where('fechaFin', '>=', $today)->get();
         return view('convocatorias.publico.index', compact('convocatorias'));
     }
     public function viewshow($id)
