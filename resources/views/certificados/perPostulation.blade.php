@@ -10,58 +10,158 @@
     @include('opcion.error')
     @include('opcion.validacion')
     @include('opcion.confirmacion')
-    <table class="table table-sm table-hover table-bordered">
-        <thead class="thead-light">
-            <tr>
-                <th class="text-center">
-                    <strong>Nombre</strong>
-                </th>
-                <th class="text-center">
-                    <strong>Tipo de archivo Merito</strong>
-                </th>
-                <th class="text-center">
-                    <strong>Puntaje</strong>
-                </th>
-                <th class="text-center">
-                    <strong>Ver</strong>
-                </th>
-                <th class="text-center">
-                    <strong>Editar Puntaje</strong>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($certificados as $certificado)
+    {{-- Certificados --}}
+    <div>
+        <h4><strong>Meritos</strong></h4>
+        <table class="table table-sm table-hover table-bordered">
+            <thead class="thead-light">
                 <tr>
-                    <td>{{$certificado->name}}</td>
-                    <td>
-                        @if ($certificado->merito_id !== null)
-                            Merito: {{$certificado->merito->tipo}}
-                        @elseif ($certificado->item_id !== null)
-                            Item: {{$certificado->item->titulo}}
-                        @elseif ($certificado->subitem_id !== null)
-                            Subitem: {{$certificado->subitem->titulo}}
-                        @elseif ($certificado->detalle_id !== null)
-                            Detalle: {{$certificado->detalle->titulo}}
-                        @endif
-                    </td>
-                    <td>{{$certificado->puntos}}</td>
-                    <td>
-                        <a href="{{$certificado->file}}"  target="_blank">Ver</a>
-                    </td>
-                    <td class="text-center" width="10px">
-                        <button type="button" class="btn btn-warning px-3 btn-sm" data-toggle="modal" data-target="#EditConv{{$certificado->id}}"><i class="fas fa-edit"></i></button>
-                        <div class="modal fade" id="EditConv{{$certificado->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    @include('certificados.edit')
-                                </div>
-                            </div>
-                        </div>
-                    </td>
+                    <th>
+                        <strong>Indice</strong>
+                    </th>
+                    <th>
+                        <strong>Tipo</strong>
+                    </th>
+                    <th>
+                        <strong>Puntos</strong>
+                    </th>
+                    <th class="text-center">
+                        <strong>Ver archivos / Editar Puntaje</strong>
+                    </th>
+                    <th class="text-center">
+                        <strong>Puntaje Final</strong>
+                    </th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {{-- Meritos --}}
+                @foreach ($postulation->convocatoria->meritos as $merito)
+                    <tr class="blue lighten-2">
+                        <td>{{$merito->indice}}</td>
+                        <td>{{$merito->tipo}}</td>
+                        <td>
+                            <div class="d-flex justify-content-center font-weight-bold">
+                                <strong>{{$merito->puntos}} pts.</strong>
+                            </div>
+                        </td>
+                        <td>
+                            @foreach ($merito->certificados as $certificado)
+                                <li class="d-flex">
+                                    <a href="{{ $certificado->file }}">{{ $certificado->name }} ({{ $certificado->puntos }} Pts.)</a>
+                                    <button type="button" class="btn btn-warning px-3 btn-sm" data-toggle="modal" data-target="#EditConv{{$certificado->id}}"><i class="fas fa-edit"></i></button>
+                                    <div class="modal fade" id="EditConv{{$certificado->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                @include('certificados.edit')
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </td>
+                        <td class="text-center">
+                            @if ($merito->items->count() === 0)
+                                {{$merito->certificados->sum('puntos')}}
+                            @endif
+                        </td>
+                    </tr>
+                    {{-- Items --}}
+                    @foreach ($merito->items as $item)
+                        <tr class="blue lighten-3">
+                            <td>{{$merito->indice}}.{{$item->indice}}</td>
+                            <td>{{$item->titulo}}</td>
+                            <td>
+                                <div class="d-flex justify-content-start font-weight-bolder">
+                                    {{$item->puntos}} pts.
+                                </div>
+                            </td>
+                            <td>
+                                @foreach ($item->certificados as $certificado)
+                                    <li class="d-flex">
+                                        <a href="{{ $certificado->file }}">{{ $certificado->name }} ({{ $certificado->puntos }} Pts.)</a>
+                                        <button type="button" class="btn btn-warning px-3 btn-sm" data-toggle="modal" data-target="#EditConv{{$certificado->id}}"><i class="fas fa-edit"></i></button>
+                                        <div class="modal fade" id="EditConv{{$certificado->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    @include('certificados.edit')
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            </td>
+                            <td class="text-center">
+                                @if ($item->subitems->count() === 0)
+                                    {{$item->certificados->sum('puntos')}}
+                                @endif
+                            </td>
+                        </tr>
+                        {{-- Sub Items --}}
+                        @foreach ($item->subitems as $subitem)
+                            <tr class="blue lighten-4">
+                                <td>{{$merito->indice}}.{{$item->indice}}.{{$subitem->indice}}</td>
+                                <td>{{$subitem->titulo}}</td>
+                                <td>
+                                    <div class="d-flex justify-content-center font-weight-normal">
+                                        {{$subitem->puntos}} pts.
+                                    </div>
+                                </td>
+                                <td>
+                                    @foreach ($subitem->certificados as $certificado)
+                                        <li class="d-flex">
+                                            <a href="{{ $certificado->file }}">{{ $certificado->name }} ({{ $certificado->puntos }} Pts.)</a>
+                                            <button type="button" class="btn btn-warning px-3 btn-sm" data-toggle="modal" data-target="#EditConv{{$certificado->id}}"><i class="fas fa-edit"></i></button>
+                                            <div class="modal fade" id="EditConv{{$certificado->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        @include('certificados.edit')
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                </td>
+                                <td class="text-center">
+                                    @if ($subitem->detalles->count() === 0)
+                                        {{$subitem->certificados->sum('puntos')}}
+                                    @endif
+                                </td>
+                            </tr>
+                            {{-- Detalles --}}
+                            @foreach ($subitem->detalles as $detalle)
+                                <tr class="blue lighten-5">
+                                    <td>{{$merito->indice}}.{{$item->indice}}.{{$subitem->indice}}.{{$detalle->indice}}</td>
+                                    <td>{{$detalle->titulo}}</td>
+                                    <td>
+                                        <div class="d-flex justify-content-end font-weight-light">
+                                            {{$detalle->puntos}} pts.
+                                        </div>
+                                    </td>
+                                    <td>
+                                        @foreach ($detalle->certificados as $certificado)
+                                            <li class="d-flex">
+                                                <a href="{{ $certificado->file }}">{{ $certificado->name }} ({{ $certificado->puntos }} Pts.)</a>
+                                                <button type="button" class="btn btn-warning px-3 btn-sm" data-toggle="modal" data-target="#EditConv{{$certificado->id}}"><i class="fas fa-edit"></i></button>
+                                                <div class="modal fade" id="EditConv{{$certificado->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            @include('certificados.edit')
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        @endforeach
+                                    </td>
+                                    <td class="text-center">
+                                        {{$detalle->certificados->sum('puntos')}}
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endforeach
+                    @endforeach
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 </div>
 @endsection

@@ -762,7 +762,7 @@
         {{-- Calificacion de meritos --}}
         @can('meritos.certificados.calificar')
             <div>
-                <h4><strong>Postulaciones</strong></h4>
+                <h4><strong>Calificacion archivos de merito</strong></h4>
                 <table class="table table-sm table-hover table-bordered">
                     <thead class="thead-light">
                         <tr>

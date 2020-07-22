@@ -17,6 +17,11 @@ class ArchivoController extends Controller
         //
     }
 
+    public function showArchivosPerPostulation($postulation_id) {
+        $archivos = Archivo::where('postulation_id', '=', $postulation_id)->get();
+        return view('archivos.perPostulation', compact('archivos'));
+    }
+
     public function create()
     {
         //
@@ -33,21 +38,21 @@ class ArchivoController extends Controller
                 $convocatoria = Convocatoria::find($documento->convocatoria_id);
                 $postulation = Postulation::where('user_id','=',$user->id)->where('convocatoria_id','=',$convocatoria->id)->firstOrFail();
                 $archivos = Archivo::where('documento_id','=',$request->documento_id)->where('postulation_id','=',$postulation->id)->count();
-                
+
                 if ($archivos == 0) {
                     $archivo = new Archivo();
                     $archivo->documento_id=$request->input('documento_id');
                     $archivo->postulation_id=$postulation->id;
-            
+
                     if($request->file('file')){
                         $path = Storage::disk('public')->put('documentos',  $request->file('file'));
                         $archivo->fill(['file' => asset($path)])->save();
                     }
                     $archivo->save();
-            
+
                     return back()->with('confirmacion','Archivo subido Correctamente');
                 } else {
-                    return back()->with('negacion','Documento ya subido');
+                    return back()->with('negacion','Documento ya subido', [$archivo->postulation_id]);
                 }
             } else {
                 return back()->with('negacion','Primero debe postularse');
@@ -55,7 +60,7 @@ class ArchivoController extends Controller
         } else {
             return back()->with('negacion','Solo para postulantes');
         }
-        
+
 
     }
 
@@ -78,5 +83,28 @@ class ArchivoController extends Controller
         $archivo = Archivo::where('id', '=', $id)->firstOrFail();
         $archivo->delete();
         return back()->with('confirmacion','Archivo Eliminado Corectamente');
+    }
+
+    public function accept($id)
+    {
+        $archivo = Archivo::where('id', '=', $id)->firstOrFail();
+
+        $archivo->estado = "Aceptado";
+        $archivo->motivo = "El documento cumple con las especificaciones dadas";
+        $archivo->save();
+
+        return back()->with('confirmacion','Archivo aceptado Correctamente', [$archivo->postulation_id]);
+
+    }
+
+    public function deny(Request $request, $id)
+    {
+        $archivo = Archivo::where('id', '=', $id)->firstOrFail();
+
+        $archivo->estado = "Rechazado";
+        $archivo->motivo = $request->input('motivo');
+        $archivo->save();
+
+        return back()->with('confirmacion','Archivo rechazado Correctamente', [$archivo->postulation_id]);
     }
 }

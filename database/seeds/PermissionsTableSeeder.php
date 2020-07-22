@@ -184,5 +184,17 @@ class PermissionsTableSeeder extends Seeder
             'slug'  => 'certificados.edit',
             'description'  => 'Editar certificado del postulante',
         ]);
+
+        Permission::create([
+            'name'  => 'Mostrar archivos.',
+            'slug'  => 'archivos.show',
+            'description'  => 'Mostrar archivos del postulante',
+        ]);
+
+        Permission::create([
+            'name'  => 'Editar archivos.',
+            'slug'  => 'archivos.edit',
+            'description'  => 'Editar archivos del postulante',
+        ]);
     }
 }

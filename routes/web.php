@@ -160,6 +160,12 @@ Route::middleware(['auth'])->group(function () {
 	//Archivo
 	Route::post('archivos/store', 'ArchivoController@store')->name('archivos.store')
 		->middleware('permission:postulantes.index');
+	Route::get('postulacion/{archivo}', 'ArchivoController@showArchivosPerPostulation')->name('archivos.perPostulation')
+		->middleware('permission:archivos.show');
+	Route::get('archivo/aceptar/{id}', 'ArchivoController@accept')->name('archivos.accept')
+		->middleware('permission:archivos.edit');
+	Route::put('archivo/denegar/{archivo}', 'ArchivoController@deny')->name('archivos.deny')
+		->middleware('permission:archivos.edit');
 	Route::delete('archivos/{archivo}', 'ArchivoController@destroy')->name('archivos.destroy')
 		->middleware('permission:postulantes.index');
 
@@ -168,7 +174,7 @@ Route::middleware(['auth'])->group(function () {
 		->middleware('permission:postulantes.index');
 	Route::get('{postulation}/certificados', 'CertificadoController@showCertificadosPerPostulation')->name('certificados.perPostulation')
 		->middleware('permission:certificados.index');
-		Route::put('certificado/{certificado}', 'CertificadoController@update')->name('certificados.update')
+	Route::put('certificado/{certificado}', 'CertificadoController@update')->name('certificados.update')
 		->middleware('permission:certificados.edit');
 	Route::delete('certificados/{certificado}', 'CertificadoController@destroy')->name('certificados.destroy')
 		->middleware('permission:postulantes.index');

@@ -16,6 +16,8 @@ class CreateArchivosTable extends Migration
         Schema::create('archivos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('file', 128)->nullable();
+            $table->string('estado')->default('En revision');
+            $table->string('motivo')->default('Aun no se ha decidido');
 
             $table->integer('documento_id')->unsigned();
             $table->integer('postulation_id')->unsigned();

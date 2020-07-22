@@ -48,6 +48,8 @@
                         <tr>
                             <th>Titulo</th>
                             <th>Archivo</th>
+                            <th>Estado</th>
+                            <th>Motivo</th>
                             @can('postulantes.index')
                                 <th>Eliminar</th>
                             @endcan
@@ -60,6 +62,20 @@
                                 <td>
                                     <a class="btn btn-primary px-3 btn-sm" href="{{ $archivo->file }}"><i class="far fa-file-pdf"></i></a>
                                 </td>
+                                @if($archivo->estado === 'En revision')
+                                    <td style="color: grey">
+                                        {{$archivo->estado}}
+                                    </td>
+                                @elseif($archivo->estado === 'Aceptado')
+                                    <td style="color: green">
+                                        {{$archivo->estado}}
+                                    </td>
+                                @else
+                                    <td style="color: red">
+                                        {{$archivo->estado}}
+                                    </td>
+                                @endif
+                                <td>{{ $archivo->motivo }}</td>
                                 @can('postulantes.index')
                                     <td class="text-center" width="10px">
                                         <form action="{{ route('archivos.destroy', $archivo->id) }}" method="POST">

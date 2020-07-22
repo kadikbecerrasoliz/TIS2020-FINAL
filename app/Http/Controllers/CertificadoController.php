@@ -26,10 +26,8 @@ class CertificadoController extends Controller
 
     public function showCertificadosPerPostulation($postulation_id)
     {
-        $certificados = Certificado::where('postulation_id', '=', $postulation_id)->get();
-        $items = Item::get();
-        $subitems = Subitem::get();
-        return view('certificados.perPostulation', compact('certificados', 'items', 'subitems'));
+        $postulation = Postulation::find($postulation_id);
+        return view('certificados.perPostulation', compact('postulation'));
     }
 
     public function store(Request $request)
