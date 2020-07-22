@@ -52,7 +52,7 @@ class ArchivoController extends Controller
 
                     return back()->with('confirmacion','Archivo subido Correctamente');
                 } else {
-                    return back()->with('negacion','Documento ya subido', [$archivo->postulation_id]);
+                    return back()->with('negacion','Documento ya subido');
                 }
             } else {
                 return back()->with('negacion','Primero debe postularse');

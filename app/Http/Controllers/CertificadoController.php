@@ -52,7 +52,7 @@ class CertificadoController extends Controller
 
                 if($certificados->count() === 0) {
                     $certificado->puntos = $merito->puntos;
-                    $postulation->puntaje_total += $merito->puntos;
+                    $postulation->puntaje_certificados += $merito->puntos;
                     $postulation->save();
                 }
 
@@ -89,7 +89,7 @@ class CertificadoController extends Controller
 
                     if($certificados->count() === 0) {
                         $certificado->puntos = $item->puntos;
-                        $postulation->puntaje_total += $item->puntos;
+                        $postulation->puntaje_certificados += $item->puntos;
                         $postulation->save();
                     }
 
@@ -126,7 +126,7 @@ class CertificadoController extends Controller
 
                         if($certificados->count() === 0) {
                             $certificado->puntos = $subitem->puntos;
-                            $postulation->puntaje_total += $subitem->puntos;
+                            $postulation->puntaje_certificados += $subitem->puntos;
                             $postulation->save();
                         }
 
@@ -164,7 +164,7 @@ class CertificadoController extends Controller
 
                             if($certificados->count() === 0) {
                                 $certificado->puntos = $detalle->puntos;
-                                $postulation->puntaje_total += $detalle->puntos;
+                                $postulation->puntaje_certificados += $detalle->puntos;
                                 $postulation->save();
                             }
 
@@ -216,7 +216,7 @@ class CertificadoController extends Controller
                     );
                 } else {
                     $puntosAc = $certificado->puntos - $request->merito;
-                    $postulation->puntaje_total -= $puntosAc;
+                    $postulation->puntaje_certificados -= $puntosAc;
                     $certificado->puntos = $request->input('merito');
                     $postulation->save();
                 }
@@ -236,7 +236,7 @@ class CertificadoController extends Controller
                     );
                 } else {
                     $puntosAc = $certificado->puntos - $request->item;
-                    $postulation->puntaje_total -= $puntosAc;
+                    $postulation->puntaje_certificados -= $puntosAc;
                     $certificado->puntos = $request->input('item');
                     $postulation->save();
                 }
@@ -256,7 +256,7 @@ class CertificadoController extends Controller
                     );
                 } else {
                     $puntosAc = $certificado->puntos - $request->subitem;
-                    $postulation->puntaje_total -= $puntosAc;
+                    $postulation->puntaje_certificados -= $puntosAc;
                     $certificado->puntos = $request->input('subitem');
                     $postulation->save();
                 }
@@ -276,7 +276,7 @@ class CertificadoController extends Controller
                     );
                 } else {
                     $puntosAc = $certificado->puntos - $request->detalle;
-                    $postulation->puntaje_total -= $puntosAc;
+                    $postulation->puntaje_certificados -= $puntosAc;
                     $certificado->puntos = $request->input('detalle');
                     $postulation->save();
                 }
@@ -292,7 +292,7 @@ class CertificadoController extends Controller
         $certificado = Certificado::where('id', '=', $id)->firstOrFail();
         $postulation = $certificado->postulation;
         if($certificado->puntos !== 0) {
-            $postulation->puntaje_total -= $certificado->puntos;
+            $postulation->puntaje_certificados -= $certificado->puntos;
             $postulation->save();
         }
         $certificado->delete();

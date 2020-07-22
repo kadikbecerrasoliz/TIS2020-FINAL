@@ -775,18 +775,34 @@
                             <strong>Fecha de subscripcion</strong>
                         </th>
                         <th class="text-center">
-                            <strong>Puntaje Final</strong>
+                            <strong>Puntaje certificados</strong>
                         </th>
+                        <th class="text-center">
+                            <strong>Puntaje examen</strong>
+                        </th>
+                        <!-- <th class="text-center">
+                            <strong>Puntaje Final</strong>
+                        </th> -->
                     </tr>
                 </thead>
                 <tbody>
                     {{-- Postulaciones --}}
                     @foreach ($convocatoria->postulations as $postulation)
                         <tr class="orange lighten-4">
-                            <td>{{$postulation->user->name}}</td>
-                            <td>{{$postulation->user->apellido}}</td>
-                            <td>{{$postulation->created_at}}</td>
-                            <td>{{$postulation->puntaje_total}}</td>
+                            <td width="30px">{{$postulation->user->name}}</td>
+                            <td width="30px">{{$postulation->user->apellido}}</td>
+                            <td width="30px">{{$postulation->created_at}}</td>
+                            <td width="30px">{{$postulation->puntaje_certificados}}
+                                <!-- / {{$meritos->sum('puntos')}} -->
+                            </td>
+                            <td width="30px">
+                                @if($postulation->puntaje_examen === null)
+                                    En revision
+                                @else
+                                    {{$postulation->puntaje_examen}} / 100
+                                @endif
+                            </td>
+                            <!-- <td>{{$postulation->puntaje_total}}</td> -->
                         </tr>
                     @endforeach
                 </tbody>

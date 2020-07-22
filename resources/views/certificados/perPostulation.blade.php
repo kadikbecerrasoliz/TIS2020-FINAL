@@ -163,5 +163,56 @@
             </tbody>
         </table>
     </div>
+    {{-- Tabla de calificaciones del postulante --}}
+    <div>
+        <h4><strong>Tabla de calificaciones</strong></h4>
+        <table class="table table-sm table-hover table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th class="text-center">
+                        <strong>Postulante</strong>
+                    </th>
+                    <th class="text-center">
+                        <strong>Puntaje certificados</strong>
+                    </th>
+                    <th class="text-center">
+                        <strong>Puntaje examen</strong>
+                    </th>
+                    @can('certificados.edit')
+                        <th class="text-center">
+                            <strong>Editar</strong>
+                        </th>
+                    @endcan
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="orange lighten-4">
+                    <td width="30px">{{$postulation->user->name}} {{$postulation->user->apellido}}</td>
+                    <td width="30px">{{$postulation->puntaje_certificados}}
+                        <!-- / {{$postulation->convocatoria->meritos->sum('puntos')}} -->
+                    </td>
+                    <td width="30px">
+                        @if($postulation->puntaje_examen === null)
+                            En revision
+                        @else
+                            {{$postulation->puntaje_examen}} / 100
+                        @endif
+                    </td>
+                    @can('certificados.edit')
+                        <td width="30px">
+                            <button type="button" class="btn btn-warning px-3 btn-sm" data-toggle="modal" data-target="#EditExamen{{$certificado->id}}"><i class="fas fa-edit"></i></button>
+                            <div class="modal fade" id="EditExamen{{$certificado->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        @include('postulations.editPuntajeExamen')
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    @endcan
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 @endsection

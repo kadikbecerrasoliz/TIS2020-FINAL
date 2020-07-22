@@ -310,7 +310,42 @@
                                 @endforeach
                             @endforeach
                         @endforeach
-
+                    </tbody>
+                </table>
+            </div>
+            {{-- Tabla de calificaciones --}}
+            <div>
+                <h4><strong>Tabla de calificaciones</strong></h4>
+                <table class="table table-sm table-hover table-bordered">
+                    <thead class="thead-light">
+                        <tr>
+                            <th class="text-center">
+                                <strong>Postulante</strong>
+                            </th>
+                            <th class="text-center">
+                                <strong>Fecha de subscripcion</strong>
+                            </th>
+                            <th class="text-center">
+                                <strong>Puntaje certificados</strong>
+                            </th>
+                            <th class="text-center">
+                                <strong>Puntaje examen</strong>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="orange lighten-4">
+                            <td width="30px">{{$postulation->user->name}} {{$postulation->user->apellido}}</td>
+                            <td width="30px">{{$postulation->created_at}}</td>
+                            <td width="30px">{{$postulation->puntaje_certificados}} / {{$postulation->convocatoria->meritos->sum('puntos')}}</td>
+                            <td width="30px">
+                                @if($postulation->puntaje_examen === null)
+                                    En revision
+                                @else
+                                    {{$postulation->puntaje_examen}} / 100
+                                @endif
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

@@ -150,6 +150,8 @@ Route::middleware(['auth'])->group(function () {
 		->middleware('permission:postulations.index');
 	Route::get('postulations/{convocatoria}/revisiones', 'PostulationController@showPostulationsPerConvocatoria')->name('postulations.perConvocatoria')
 		->middleware('permission:postulations.index');
+	Route::put('postulation/{postulation}/examen', 'PostulationController@editarCalificacionFinal')->name('postulations.editPuntajeExamen')
+		->middleware('permission:certificados.edit');
 	Route::delete('postulations/{postulation}', 'PostulationController@destroy')->name('postulations.destroy')
 		->middleware('permission:postulations.destroy');
 
