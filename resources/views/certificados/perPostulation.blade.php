@@ -187,11 +187,11 @@
             </thead>
             <tbody>
                 <tr class="orange lighten-4">
-                    <td width="30px">{{$postulation->user->name}} {{$postulation->user->apellido}}</td>
-                    <td width="30px">{{$postulation->puntaje_certificados}}
+                    <td width="30px" class="text-center">{{$postulation->user->name}} {{$postulation->user->apellido}}</td>
+                    <td width="30px" class="text-center">{{$postulation->puntaje_certificados}}
                         <!-- / {{$postulation->convocatoria->meritos->sum('puntos')}} -->
                     </td>
-                    <td width="30px">
+                    <td width="30px" class="text-center">
                         @if($postulation->puntaje_examen === null)
                             En revision
                         @else
@@ -199,7 +199,7 @@
                         @endif
                     </td>
                     @can('certificados.edit')
-                        <td width="30px">
+                        <td width="10px" class="text-center">
                             <button type="button" class="btn btn-warning px-3 btn-sm" data-toggle="modal" data-target="#EditExamen{{$certificado->id}}"><i class="fas fa-edit"></i></button>
                             <div class="modal fade" id="EditExamen{{$certificado->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">

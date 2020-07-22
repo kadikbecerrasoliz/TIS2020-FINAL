@@ -789,13 +789,19 @@
                     {{-- Postulaciones --}}
                     @foreach ($convocatoria->postulations as $postulation)
                         <tr class="orange lighten-4">
-                            <td width="30px">{{$postulation->user->name}}</td>
-                            <td width="30px">{{$postulation->user->apellido}}</td>
-                            <td width="30px">{{$postulation->created_at}}</td>
-                            <td width="30px">{{$postulation->puntaje_certificados}}
+                            <td width="30px" class="text-center">
+                                {{$postulation->user->name}}
+                            </td>
+                            <td width="30px" class="text-center">
+                                {{$postulation->user->apellido}}
+                            </td>
+                            <td width="30px" class="text-center">
+                                {{$postulation->created_at}}
+                            </td>
+                            <td width="30px" class="text-center">{{$postulation->puntaje_certificados}}
                                 <!-- / {{$meritos->sum('puntos')}} -->
                             </td>
-                            <td width="30px">
+                            <td width="30px" class="text-center">
                                 @if($postulation->puntaje_examen === null)
                                     En revision
                                 @else
