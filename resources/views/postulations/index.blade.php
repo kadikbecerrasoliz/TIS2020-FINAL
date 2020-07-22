@@ -82,46 +82,5 @@
             </tbody>
         </table>
     </div>
-    @can('archivos.show')
-        <div>
-            <h4><strong>Documentos por postulacion</strong></h4>
-            <table class="table table-sm table-hover table-bordered">
-                <thead class="thead-light">
-                    <tr>
-                        <th>
-                            <strong>Convocatoria</strong>
-                        </th>
-                        <th>
-                            <strong>Postulante</strong>
-                        </th>
-                        <th>
-                            <strong>Fecha de subscripcion</strong>
-                        </th>
-                        @can('archivos.show')
-                            <th class="text-center">
-                                <strong>Ver</strong>
-                            </th>
-                        @endcan
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($postulations as $postulation)
-                        <tr>
-                            <td>{{$postulation->convocatoria->titulo}}</td>
-                            <td>{{$postulation->user->name}} {{$postulation->user->apellido}}</td>
-                            <td>{{$postulation->created_at}}</td>
-                            @can('archivos.show')
-                                <td>
-                                    <a href="{{ route('archivos.perPostulation', $postulation->id) }}">
-                                        <button type="button" class="btn btn-info px-3 btn-sm"><i class="fas fa-eye"></i></button>
-                                    </a>
-                                </td>
-                            @endcan
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    @endcan
 </div>
 @endsection

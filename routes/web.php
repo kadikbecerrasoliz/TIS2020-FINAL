@@ -60,6 +60,8 @@ Route::middleware(['auth'])->group(function () {
 	//Convocatorias
 	Route::get('convocatorias', 'ConvocatoriaController@index')->name('convocatorias.index')
 		->middleware('permission:convocatorias.index');
+	Route::get('convocatorias/revision', 'ConvocatoriaController@showVistaParaRevision')->name('convocatorias.revision.index')
+		->middleware('permission:archivos.show');
 	Route::post('convocatorias/store', 'ConvocatoriaController@store')->name('convocatorias.store')
 	->middleware('permission:convocatorias.create');
 	Route::put('convocatorias/{convocatoria}', 'ConvocatoriaController@update')->name('convocatorias.update')
@@ -146,6 +148,8 @@ Route::middleware(['auth'])->group(function () {
 	//Postulation
 	Route::get('postulations', 'PostulationController@index')->name('postulations.index')
 		->middleware('permission:postulations.index');
+	Route::get('postulations/{convocatoria}/revisiones', 'PostulationController@showPostulationsPerConvocatoria')->name('postulations.perConvocatoria')
+		->middleware('permission:postulations.index');
 	Route::delete('postulations/{postulation}', 'PostulationController@destroy')->name('postulations.destroy')
 		->middleware('permission:postulations.destroy');
 
@@ -173,7 +177,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::post('certificados/store', 'CertificadoController@store')->name('certificados.store')
 		->middleware('permission:postulantes.index');
 	Route::get('{postulation}/certificados', 'CertificadoController@showCertificadosPerPostulation')->name('certificados.perPostulation')
-		->middleware('permission:certificados.index');
+		->middleware('permission:certificados.show');
 	Route::put('certificado/{certificado}', 'CertificadoController@update')->name('certificados.update')
 		->middleware('permission:certificados.edit');
 	Route::delete('certificados/{certificado}', 'CertificadoController@destroy')->name('certificados.destroy')

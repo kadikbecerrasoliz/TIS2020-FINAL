@@ -68,7 +68,6 @@ class ConvocatoriaController extends Controller
         return back()->with('confirmacion','Convocatoria Eliminado Corectamente');
     }
 
-
     public function view()
     {
         $today = Carbon::now();
@@ -87,5 +86,11 @@ class ConvocatoriaController extends Controller
         $meritos= $convocatoria->meritos;
         $materias = Materia::get();
         return view('convocatorias.publico.show', compact('convocatoria', 'requerimientos', 'materias', 'requisitos', 'documentos', 'fechas', 'meritos'));
+    }
+
+    public function showVistaParaRevision()
+    {
+        $convocatorias = Convocatoria::orderBy('titulo')->get();
+        return view('convocatorias.revision.index', compact('convocatorias'));
     }
 }

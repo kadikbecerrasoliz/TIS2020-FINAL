@@ -759,49 +759,6 @@
                 </tbody>
             </table>
         </div>
-        {{-- Calificacion de meritos --}}
-        @can('meritos.certificados.calificar')
-            <div>
-                <h4><strong>Calificacion archivos de merito</strong></h4>
-                <table class="table table-sm table-hover table-bordered">
-                    <thead class="thead-light">
-                        <tr>
-                            <th class="text-center">
-                                <strong>Nombre del postulante</strong>
-                            </th>
-                            <th class="text-center">
-                                <strong>Apellido del postulante</strong>
-                            </th>
-                            <th class="text-center">
-                                <strong>Fecha de subscripcion</strong>
-                            </th>
-                            @can('certificados.index')
-                                <th class="text-center">
-                                    <strong>Certificados subidos</strong>
-                                </th>
-                            @endcan
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {{-- Postulaciones --}}
-                        @foreach ($convocatoria->postulations as $postulation)
-                            <tr>
-                                <td>{{$postulation->user->name}}</td>
-                                <td>{{$postulation->user->apellido}}</td>
-                                <td>{{$postulation->created_at}}</td>
-                                @can('certificados.index')
-                                    <td class="text-center" width="10px">
-                                        <a href="{{ route('certificados.perPostulation', $postulation->id) }}">
-                                            <button type="button" class="btn btn-info px-3 btn-sm"><i class="fas fa-eye"></i></button>
-                                        </a>
-                                    </td>
-                                @endcan
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        @endcan
         {{-- Tabla de calificaciones por convocatoria --}}
         <div>
             <h4><strong>Tabla de calificaciones</strong></h4>

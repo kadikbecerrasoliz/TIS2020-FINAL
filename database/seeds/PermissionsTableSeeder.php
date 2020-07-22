@@ -174,9 +174,9 @@ class PermissionsTableSeeder extends Seeder
         ]);
 
         Permission::create([
-            'name'  => 'Ver lista de certificados.',
-            'slug'  => 'certificados.index',
-            'description'  => 'Lista de certificados',
+            'name'  => 'Ver certificado.',
+            'slug'  => 'certificados.show',
+            'description'  => 'Ver certificado',
         ]);
 
         Permission::create([

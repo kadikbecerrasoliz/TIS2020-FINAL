@@ -42,26 +42,6 @@ class RolesTableSeeder extends Seeder
             'description'=> 'Persona con control de secretaria',
         ]);
         \DB::table('permission_role')->insert(array(
-            'permission_id'    => '16',
-            'role_id'=> '3',
-        ));
-        \DB::table('permission_role')->insert(array(
-            'permission_id'    => '17',
-            'role_id'=> '3',
-        ));
-        \DB::table('permission_role')->insert(array(
-            'permission_id'    => '18',
-            'role_id'=> '3',
-        ));
-        \DB::table('permission_role')->insert(array(
-            'permission_id'    => '19',
-            'role_id'=> '3',
-        ));
-        \DB::table('permission_role')->insert(array(
-            'permission_id'    => '20',
-            'role_id'=> '3',
-        ));
-        \DB::table('permission_role')->insert(array(
             'permission_id'    => '21',
             'role_id'=> '3',
         ));
@@ -100,10 +80,6 @@ class RolesTableSeeder extends Seeder
             'slug'      => 'comisionario',
             'description'=> 'Persona con control de comisionario',
         ]);
-        \DB::table('permission_role')->insert(array(
-            'permission_id'    => '16',
-            'role_id'=> '4',
-        ));
         \DB::table('permission_role')->insert(array(
             'permission_id'    => '20',
             'role_id'=> '4',
