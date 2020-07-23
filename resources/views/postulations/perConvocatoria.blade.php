@@ -40,7 +40,7 @@
                         <td>{{$postulation->user->name}} {{$postulation->user->apellido}}</td>
                         <td>{{$postulation->created_at}}</td>
                         @can('archivos.show')
-                            <td>
+                            <td class="text-center">
                                 <a href="{{ route('archivos.perPostulation', $postulation->id) }}">
                                     <button type="button" class="btn btn-dark px-3 btn-sm"><i class="fas fa-eye"></i></button>
                                 </a>

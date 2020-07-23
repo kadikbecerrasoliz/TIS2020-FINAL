@@ -53,7 +53,7 @@
                             {{$archivo->estado}}
                         </td>
                     @endif
-                    <td>
+                    <td class="text-center">
                         <a href="{{$archivo->file}}"  target="_blank">Ver</a>
                     </td>
                     @can('archivos.edit')

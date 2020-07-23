@@ -342,7 +342,8 @@
                                 {{$postulation->created_at}}
                             </td>
                             <td width="30px" class="text-center">
-                            {{$postulation->puntaje_certificados}} / {{$postulation->convocatoria->meritos->sum('puntos')}}
+                                {{$postulation->puntaje_certificados}}
+                                <!-- / {{$postulation->convocatoria->meritos->sum('puntos')}} -->
                             </td>
                             <td width="30px" class="text-center">
                                 @if($postulation->puntaje_examen === null)

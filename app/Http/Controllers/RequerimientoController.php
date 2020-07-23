@@ -58,6 +58,6 @@ class RequerimientoController extends Controller
     {
         $requerimiento = Requerimiento::where('id', '=', $id)->firstOrFail();
         $requerimiento->delete();
-        return back()->with('confirmacion','Requerimiento Eliminado Corectamente');
+        return back()->with('confirmacion','Requerimiento Eliminado Correctamente');
     }
 }
