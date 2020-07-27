@@ -14,6 +14,65 @@
         <h2 class="article__title">{{ $postulation->convocatoria->titulo }}</h2>
         <div class="article__content">{{ $postulation->convocatoria->description }}</div>
         @if($postulation->convocatoria->fechaFin >= $today)
+        {{-- Requerimientos --}}
+            <div>
+                <h4><strong>Requerimientos de la convocatoria</strong></h4>
+                <ul>
+                    @foreach ($postulation->convocatoria->requerimientos as $requerimiento)
+                        <li>{{$requerimiento->materia->name}}</li>
+                        <ul>
+                            @foreach ($requerimiento->requerimientoTematicas as $requerimientoTematica)
+                                <li style="list-style: none">{{$requerimientoTematica->tematica->name}} <strong>Pts. {{$requerimientoTematica->puntos}}</strong></li>
+                            @endforeach
+                        </ul>
+                    @endforeach
+                </ul>
+            </div>
+            <div>
+                <table class="table table-sm table-hover table-bordered">
+                    <thead class="thead-light">
+                        <tr>
+                            <th class="text-center">Requerimiento</th>
+                            <th class="text-center">Puntos</th>
+                            @can('solicituds.create')
+                                <th class="text-center">Postulacion</th>
+                            @endcan
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($postulation->convocatoria->requerimientos as $requerimiento)
+                            <tr>
+                                <td>{{ $requerimiento->materia->name }}</td>
+                                <td class="text-center">100</td>
+                                @if($postulation->postulationRequerimientos->where('requerimiento_id', $requerimiento->id)->first() === null)
+                                    @can('solicituds.create')
+                                        <td class="text-center">
+                                        <form action="{{ route('requerimientos.postulaciones.create', [$requerimiento->id, $postulation->id]) }}" method="POST">
+                                            {{ csrf_field() }}
+                                            <button class="btn btn-primary px-3 btn-sm" type="submit"><i class="fas fa-plus-square"></i></button>
+                                        </form>
+                                        </td>
+                                    @endcan
+                                @else
+                                    @if($postulation->postulationRequerimientos->where('requerimiento_id', $requerimiento->id)->first()->estado === 'Aprovado')
+                                        <td style="color: green" class="text-center">
+                                            {{$postulation->postulationRequerimientos->where('requerimiento_id', $requerimiento->id)->first()->estado}}
+                                        </td>
+                                    @elseif($postulation->postulationRequerimientos->where('requerimiento_id', $requerimiento->id)->first()->estado === 'Rechazado')
+                                        <td style="color: red" class="text-center">
+                                            {{$postulation->postulationRequerimientos->where('requerimiento_id', $requerimiento->id)->first()->estado}}
+                                        </td>
+                                    @else
+                                        <td style="color: grey" class="text-center">
+                                            {{$postulation->postulationRequerimientos->where('requerimiento_id', $requerimiento->id)->first()->estado}}
+                                        </td>
+                                    @endif
+                                @endif
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
             {{-- Documentos --}}
             <div>
                 <h4><strong>Documentos de Requisitos a Presentar</strong></h4>
@@ -333,27 +392,7 @@
                             </th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr class="orange lighten-4">
-                            <td width="30px" class="text-center">
-                                {{$postulation->user->name}} {{$postulation->user->apellido}}
-                            </td>
-                            <td width="30px" class="text-center">
-                                {{$postulation->created_at}}
-                            </td>
-                            <td width="30px" class="text-center">
-                                {{$postulation->puntaje_certificados}}
-                                <!-- / {{$postulation->convocatoria->meritos->sum('puntos')}} -->
-                            </td>
-                            <td width="30px" class="text-center">
-                                @if($postulation->puntaje_examen === null)
-                                    En revision
-                                @else
-                                    {{$postulation->puntaje_examen}} / 100
-                                @endif
-                            </td>
-                        </tr>
-                    </tbody>
+
                 </table>
             </div>
         @else

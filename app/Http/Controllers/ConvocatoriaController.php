@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Convocatoria;
 use App\Materia;
 use App\Postulation;
+use App\Tematica;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ConvocatoriaRequest;
@@ -39,8 +40,9 @@ class ConvocatoriaController extends Controller
         $documentos= $convocatoria->documentos;
         $fechas= $convocatoria->fechas;
         $meritos= $convocatoria->meritos;
+        $tematicas = Tematica::get();
         $materias = Materia::get();
-        return view('convocatorias.show', compact('convocatoria', 'requerimientos', 'materias', 'requisitos', 'documentos', 'fechas', 'meritos'));
+        return view('convocatorias.show', compact('convocatoria', 'requerimientos', 'materias', 'requisitos', 'documentos', 'fechas', 'meritos', 'tematicas'));
     }
 
     public function edit($id)
@@ -84,8 +86,9 @@ class ConvocatoriaController extends Controller
         $documentos= $convocatoria->documentos;
         $fechas= $convocatoria->fechas;
         $meritos= $convocatoria->meritos;
+        $tematicas = Tematica::get();
         $materias = Materia::get();
-        return view('convocatorias.publico.show', compact('convocatoria', 'requerimientos', 'materias', 'requisitos', 'documentos', 'fechas', 'meritos'));
+        return view('convocatorias.publico.show', compact('convocatoria', 'requerimientos', 'materias', 'requisitos', 'documentos', 'fechas', 'meritos', 'tematicas'));
     }
 
     public function showVistaParaRevision()

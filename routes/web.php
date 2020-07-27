@@ -73,11 +73,19 @@ Route::middleware(['auth'])->group(function () {
 
 	//Requerimientos
 	Route::post('requerimientos/store', 'RequerimientoController@store')->name('requerimientos.store')
-	->middleware('permission:convocatorias.create');
+		->middleware('permission:convocatorias.create');
 	Route::put('requerimientos/{requerimiento}', 'RequerimientoController@update')->name('requerimientos.update')
 		->middleware('permission:convocatorias.edit');
 	Route::delete('requerimientos/{requerimiento}', 'RequerimientoController@destroy')->name('requerimientos.destroy')
 		->middleware('permission:convocatorias.destroy');
+
+	//Requerimiento Tematicas
+	Route::post('requerimiento/tematicas/store', 'RequerimientoTematicaController@store')->name('requerimientoTematicas.store')
+		->middleware('permission:tematicas.create');
+	Route::put('requerimiento/tematicas/{item}', 'RequerimientoTematicaController@update')->name('requerimientoTematicas.update')
+		->middleware('permission:tematicas.edit');
+	Route::delete('requerimiento/tematicas/{item}', 'RequerimientoTematicaController@destroy')->name('requerimientoTematicas.destroy')
+		->middleware('permission:tematicas.destroy');
 
 	//Requisitos
 	Route::post('requisitos/store', 'RequisitoController@store')->name('requisitos.store')
@@ -154,6 +162,11 @@ Route::middleware(['auth'])->group(function () {
 		->middleware('permission:certificados.edit');
 	Route::delete('postulations/{postulation}', 'PostulationController@destroy')->name('postulations.destroy')
 		->middleware('permission:postulations.destroy');
+	Route::post('requerimiento/postular/{requerimiento}/{postulation}', 'RequerimientoController@postularse')->name('requerimientos.postulaciones.create');
+	Route::get('requerimientos/apply/{id}', 'PostulationController@applyRequerimiento')->name('requerimientos.postulaciones.apply')
+		->middleware('permission:certificados.edit');
+	Route::get('requerimientos/deny/{id}', 'PostulationController@denyRequerimiento')->name('requerimientos.postulaciones.deny')
+		->middleware('permission:certificados.edit');
 
 	//Postulante
 	Route::get('postulantes/solicitudes', 'PostulanteController@solicitudes')->name('postulantes.solicitudes')
@@ -184,4 +197,14 @@ Route::middleware(['auth'])->group(function () {
 		->middleware('permission:certificados.edit');
 	Route::delete('certificados/{certificado}', 'CertificadoController@destroy')->name('certificados.destroy')
 		->middleware('permission:postulantes.index');
+
+	//Tematicas
+	Route::get('tematicas', 'TematicaController@index')->name('tematicas.index')
+		->middleware('permission:tematicas.index');
+	Route::post('tematicas/store', 'TematicaController@store')->name('tematicas.store')
+	->middleware('permission:tematicas.create');
+	Route::put('tematicas/{tematica}', 'TematicaController@update')->name('tematicas.update')
+		->middleware('permission:tematicas.edit');
+	Route::delete('tematicas/{tematica}', 'TematicaController@destroy')->name('tematicas.destroy')
+		->middleware('permission:tematicas.destroy');
 });

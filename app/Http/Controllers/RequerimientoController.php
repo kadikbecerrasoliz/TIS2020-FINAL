@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Requerimiento;
 use App\Materia;
+use App\PostulationRequerimiento;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use App\Postulation;
 
 class RequerimientoController extends Controller
 {
@@ -59,5 +62,18 @@ class RequerimientoController extends Controller
         $requerimiento = Requerimiento::where('id', '=', $id)->firstOrFail();
         $requerimiento->delete();
         return back()->with('confirmacion','Requerimiento Eliminado Correctamente');
+    }
+
+    public function postularse($requerimiento_id, $postulation_id)
+    {
+        $today = Carbon::now();
+        $postulation = Postulation::find($postulation_id);
+        $postulationReq = new PostulationRequerimiento();
+
+        $postulationReq->postulation_id = $postulation_id;
+        $postulationReq->requerimiento_id = $requerimiento_id;
+
+        $postulationReq->save();
+        return redirect()->back()->with('confirmacion','Postulacion enviado Correctamente');
     }
 }

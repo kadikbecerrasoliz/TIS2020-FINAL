@@ -24,4 +24,9 @@ class Postulation extends Model
     {
         return $this->hasMany(Certificado::class);
     }
+
+    public function postulationRequerimientos()
+    {
+        return $this->hasMany(PostulationRequerimiento::class);
+    }
 }

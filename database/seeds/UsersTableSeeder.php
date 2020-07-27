@@ -54,12 +54,12 @@ class UsersTableSeeder extends Seeder
         ));
 
         User::create([
-            'name'       => 'comisionario',
-            'apellido'       => 'comisionario',
+            'name'       => 'Ricardo',
+            'apellido'       => 'Di Caprio',
             'sis'       => '123456777',
             'ci'       => '5905038',
             'email'      => 'comisionario@gmail.com',
-            'password'      => bcrypt('comisionario5905038'),
+            'password'      => bcrypt('1234567'),
         ]);
         \DB::table('role_user')->insert(array(
             'role_id'    => '4',
@@ -67,12 +67,12 @@ class UsersTableSeeder extends Seeder
         ));
 
         User::create([
-            'name'       => 'postulante',
-            'apellido'       => 'postulante',
+            'name'       => 'Juan Carlos',
+            'apellido'       => 'Villarroel Sevita',
             'sis'       => '123456787',
             'ci'       => '5905039',
             'email'      => 'postulante@gmail.com',
-            'password'      => bcrypt('postulante5905039'),
+            'password'      => bcrypt('1234567'),
         ]);
         \DB::table('role_user')->insert(array(
             'role_id'    => '2',

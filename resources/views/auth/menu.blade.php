@@ -20,6 +20,13 @@
             </span>
         </a>
     @endcan
+    @can('tematicas.index')
+        <a class="list-group-item list-group-item-action" href="{{ route('tematicas.index') }}">
+            <span class="text-left">
+                <i class="fas fa-pen-alt"></i> Tematica
+            </span>
+        </a>
+    @endcan
     @can('convocatorias.index')
         <a class="list-group-item list-group-item-action" href="{{ route('convocatorias.index') }}">
             <span class="text-left">

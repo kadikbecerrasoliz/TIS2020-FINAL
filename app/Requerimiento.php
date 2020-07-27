@@ -19,4 +19,14 @@ class Requerimiento extends Model
     {
         return $this->belongsTo(Convocatoria::class);
     }
+
+    public function requerimientoTematicas()
+    {
+        return $this->hasMany(RequerimientoTematica::class);
+    }
+
+    public function requerimientoPostulations()
+    {
+        return $this->hasMany(PostulationRequerimiento::class);
+    }
 }

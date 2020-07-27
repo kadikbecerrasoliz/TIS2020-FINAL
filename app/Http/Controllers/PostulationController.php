@@ -6,6 +6,7 @@ use Caffeinated\Shinobi\Models\Role;
 use App\Postulation;
 use App\Convocatoria;
 use App\Codigo;
+use App\PostulationRequerimiento;
 use Illuminate\Http\Request;
 
 class PostulationController extends Controller
@@ -70,5 +71,45 @@ class PostulationController extends Controller
         $postulations = Postulation::where('id', '=', $id)->firstOrFail();
         $postulations->delete();
         return back()->with('confirmacion','Postulacion  Eliminado Corectamente');
+    }
+
+    public function applyRequerimiento($id)
+    {
+        $postulationRequerimiento = PostulationRequerimiento::where('id', '=', $id)->firstOrFail();
+
+        if ($postulationRequerimiento->estado === 'En revision') {
+
+            $postulationRequerimiento->estado = 'Aprovado';
+            $postulationRequerimiento->save();
+
+            return back()->with('confirmacion','Postulacion a requerimiento aceptado Correctamente');;
+        } else {
+            if ($postulationRequerimiento->estado == 'Aprovado') {
+                return back()->with('negacion','Postulacion a requerimiento ya fue aceptado');
+            } else {
+                return back()->with('negacion','Postulacion a requerimiento ya fue rechazado');
+            }
+        }
+
+
+
+    }
+    public function denyRequerimiento($id)
+    {
+        $postulationRequerimiento = PostulationRequerimiento::where('id', '=', $id)->firstOrFail();
+
+        if ($postulationRequerimiento->estado == 'En revision') {
+
+            $postulationRequerimiento->estado='Rechazado';
+            $postulationRequerimiento->save();
+
+            return back()->with('confirmacion','Postulacion a requerimiento rechazado Correctamente');;
+        } else {
+            if ($postulationRequerimiento->estado == 'Aprovado') {
+                return back()->with('negacion','Postulacion a requerimiento ya fue aceptado');
+            } else {
+                return back()->with('negacion','Postulacion a requerimiento ya fue rechazado');
+            }
+        }
     }
 }

@@ -77,6 +77,11 @@
                         <th>
                             <strong>Destino</strong>
                         </th>
+                        @can('tematicas.create')
+                            <th class="text-center">
+                                <strong>Tematica</strong>
+                            </th>
+                        @endcan
                         @can('convocatorias.show')
                             <th class="text-center">
                                 <strong>Ver</strong>
@@ -101,6 +106,18 @@
                             <td>{{$requerimiento->cantidad}}</td>
                             <td>{{$requerimiento->hrsAcademic}}</td>
                             <td>{{$requerimiento->materia->name}}</td>
+                            @can('tematicas.create')
+                                <td class="text-center" width="10px">
+                                    <button type="button" class="btn btn-secondary px-3 btn-sm" data-toggle="modal" data-target="#CreateTematica{{$requerimiento->id}}"><i class="fas fa-plus"></i></button>
+                                    <div class="modal fade" id="CreateTematica{{$requerimiento->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                @include('requerimientoTematicas.create')
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            @endcan
                             @can('convocatorias.show')
                                 <td class="text-center" width="10px">
                                     <button type="button" class="btn btn-info px-3 btn-sm" data-toggle="modal" data-target="#ShowReq{{$requerimiento->id}}"><i class="fas fa-eye"></i></button>
@@ -154,6 +171,67 @@
                                 </td>
                             @endcan
                         </tr>
+                        @foreach ($requerimiento->requerimientoTematicas as $requerimientoTematica)
+                            <tr class="grey lighten-2">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>{{$requerimientoTematica->tematica->name}} ({{$requerimientoTematica->puntos}} pts)</td>
+                                <td></td>
+                                @can('tematicas.show')
+                                    <td class="text-center" width="10px">
+                                        <button type="button" class="btn btn-info px-3 btn-sm" data-toggle="modal" data-target="#ShowrequerimientoTematica{{$requerimientoTematica->id}}"><i class="fas fa-eye"></i></button>
+                                        <div class="modal fade" id="ShowrequerimientoTematica{{$requerimientoTematica->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    @include('requerimientoTematicas.show')
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                @endcan
+                                @can('tematicas.edit')
+                                    <td class="text-center" width="10px">
+                                        <button type="button" class="btn btn-warning px-3 btn-sm" data-toggle="modal" data-target="#EditrequerimientoTematica{{$requerimientoTematica->id}}"><i class="fas fa-edit"></i></button>
+                                        <div class="modal fade" id="EditrequerimientoTematica{{$requerimientoTematica->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                @include('requerimientoTematicas.edit')
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                @endcan
+                                @can('tematicas.destroy')
+                                    <td class="text-center" width="10px">
+                                        <button type="button" class="btn btn-danger px-3 btn-sm" data-toggle="modal" data-target="#DestroyRequerimientoTematica{{$requerimientoTematica->id}}"><i class="fas fa-trash-alt"></i></button>
+                                        <div class="modal fade" id="DestroyRequerimientoTematica{{$requerimientoTematica->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title w-100" id="exampleModalLabel">Elminar</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        El Item de conocimiento se eliminara de la base de datos
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <form action="{{ route('requerimientoTematicas.destroy', $requerimientoTematica->id) }}" method="POST">
+                                                            {{ csrf_field() }}
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                            <input type="hidden" name="_method" value="DELETE">
+                                                            <button class="btn btn-danger" type="submit">Eliminar</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                @endcan
+                            </tr>
+                        @endforeach
                     @endforeach
                 </tbody>
             </table>
@@ -777,12 +855,6 @@
                         <th class="text-center">
                             <strong>Puntaje certificados</strong>
                         </th>
-                        <th class="text-center">
-                            <strong>Puntaje examen</strong>
-                        </th>
-                        <!-- <th class="text-center">
-                            <strong>Puntaje Final</strong>
-                        </th> -->
                     </tr>
                 </thead>
                 <tbody>
@@ -798,17 +870,9 @@
                             <td width="30px" class="text-center">
                                 {{$postulation->created_at}}
                             </td>
-                            <td width="30px" class="text-center">{{$postulation->puntaje_certificados}}
-                                <!-- / {{$meritos->sum('puntos')}} -->
-                            </td>
                             <td width="30px" class="text-center">
-                                @if($postulation->puntaje_examen === null)
-                                    En revision
-                                @else
-                                    {{$postulation->puntaje_examen}} / 100
-                                @endif
+                                {{$postulation->puntaje_certificados}}
                             </td>
-                            <!-- <td>{{$postulation->puntaje_total}}</td> -->
                         </tr>
                     @endforeach
                 </tbody>

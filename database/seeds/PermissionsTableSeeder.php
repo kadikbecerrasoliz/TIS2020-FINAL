@@ -196,5 +196,32 @@ class PermissionsTableSeeder extends Seeder
             'slug'  => 'archivos.edit',
             'description'  => 'Editar archivos del postulante',
         ]);
+
+        //Tematicas
+        Permission::create([
+            'name'  => 'Ver Lista de tematicas',
+            'slug'  => 'tematicas.index',
+            'description'  => 'Lista todos las tematicas del sistema',
+        ]);
+        Permission::create([
+            'name'  => 'Crear tematicas',
+            'slug'  => 'tematicas.create',
+            'description'  => 'Crear y Guardar tematicas en el sistema',
+        ]);
+        Permission::create([
+            'name'  => 'Editar tematicas',
+            'slug'  => 'tematicas.edit',
+            'description'  => 'Editar las tematicas del sistema',
+        ]);
+        Permission::create([
+            'name'  => 'Eliminar tematicas',
+            'slug'  => 'tematicas.destroy',
+            'description'  => 'Eliminar las tematicas del sistema',
+        ]);
+        Permission::create([
+            'name'  => 'Ver Perfil de tematicas',
+            'slug'  => 'tematicas.show',
+            'description'  => 'Ver perfil todas las tematicas del sistema',
+        ]);
     }
 }

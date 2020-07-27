@@ -15,8 +15,6 @@ class CreatePostulationsTable extends Migration
     {
         Schema::create('postulations', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('puntaje_total')->default('0');
-            $table->integer('puntaje_examen')->nullable();
             $table->integer('puntaje_certificados')->default('0');
             $table->integer('convocatoria_id')->unsigned();
             $table->integer('user_id')->unsigned();
