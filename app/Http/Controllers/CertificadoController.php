@@ -91,6 +91,13 @@ class CertificadoController extends Controller
                         $certificado->puntos = $item->puntos;
                         $postulation->puntaje_certificados += $item->puntos;
                         $postulation->save();
+                    } else {
+                        $puntajeAc = $certificados->sum('puntos') + $item->puntos;
+                        if($puntajeAc <= $item->merito->puntos) {
+                            $certificado->puntos = $item->puntos;
+                            $postulation->puntaje_certificados += $item->puntos;
+                            $postulation->save();
+                        }
                     }
 
                     if($request->file('file')){
@@ -128,6 +135,13 @@ class CertificadoController extends Controller
                             $certificado->puntos = $subitem->puntos;
                             $postulation->puntaje_certificados += $subitem->puntos;
                             $postulation->save();
+                        } else {
+                            $puntajeAc = $certificados->sum('puntos') + $subitem->puntos;
+                            if($puntajeAc <= $subitem->item->puntos) {
+                                $certificado->puntos = $subitem->puntos;
+                                $postulation->puntaje_certificados += $subitem->puntos;
+                                $postulation->save();
+                            }
                         }
 
                         if($request->file('file')){
@@ -166,6 +180,13 @@ class CertificadoController extends Controller
                                 $certificado->puntos = $detalle->puntos;
                                 $postulation->puntaje_certificados += $detalle->puntos;
                                 $postulation->save();
+                            } else {
+                                $puntajeAc = $certificados->sum('puntos') + $detalle->puntos;
+                                if($puntajeAc <= $detalle->subitem->puntos) {
+                                    $certificado->puntos = $detalle->puntos;
+                                    $postulation->puntaje_certificados += $detalle->puntos;
+                                    $postulation->save();
+                                }
                             }
 
                             if($request->file('file')){
@@ -229,10 +250,10 @@ class CertificadoController extends Controller
             } else {
                 $certificados = Certificado::where('item_id', '=', $certificado->item->id)
                     ->where('postulation_id', '=', $postulation->id)->get();
-                if(($certificados->sum('puntos') - $certificado->puntos + $request->item) > $certificado->item->puntos) {
-                    return back()->with('negacion', 'La sumatoria de puntajes no debe pasar a la del item. '
-                        . 'Puntaje item: ' . $certificado->item->puntos . ' vs Puntaje Actual: '
-                        . $certificados->sum('puntos')
+                if(($certificados->sum('puntos') - $certificado->puntos + $request->item) > $certificado->item->merito->puntos) {
+                    return back()->with('negacion', 'La sumatoria de puntajes no debe pasar a la del merito. '
+                        . 'Puntaje items subidos: ' . $certificados->sum('puntos') . ' vs Puntaje del Merito: '
+                        . $certificado->item->merito->puntos
                     );
                 } else {
                     $puntosAc = $certificado->puntos - $request->item;
@@ -249,10 +270,10 @@ class CertificadoController extends Controller
             } else {
                 $certificados = Certificado::where('subitem_id', '=', $certificado->subitem->id)
                     ->where('postulation_id', '=', $postulation->id)->get();
-                if(($certificados->sum('puntos') - $certificado->puntos + $request->subitem) > $certificado->subitem->puntos) {
-                    return back()->with('negacion', 'La sumatoria de puntajes no debe pasar a la del subitem. '
-                        . 'Puntaje subitem: ' . $certificado->subitem->puntos . ' vs Puntaje Actual: '
-                        . $certificados->sum('puntos')
+                if(($certificados->sum('puntos') - $certificado->puntos + $request->subitem) > $certificado->subitem->item->puntos) {
+                    return back()->with('negacion', 'La sumatoria de puntajes no debe pasar a la del item. '
+                        . 'Puntaje subitems subidos: ' . $certificados->sum('puntos') . ' vs Puntaje del item: '
+                        . $certificado->subitem->item->puntos
                     );
                 } else {
                     $puntosAc = $certificado->puntos - $request->subitem;
@@ -269,10 +290,10 @@ class CertificadoController extends Controller
             } else {
                 $certificados = Certificado::where('detalle_id', '=', $certificado->detalle->id)
                     ->where('postulation_id', '=', $postulation->id)->get();
-                if(($certificados->sum('puntos') - $certificado->puntos + $request->detalle) > $certificado->detalle->puntos) {
-                    return back()->with('negacion', 'La sumatoria de puntajes no debe pasar a la del detalle. '
-                        . 'Puntaje detalle: ' . $certificado->detalle->puntos . ' vs Puntaje Actual: '
-                        . $certificados->sum('puntos')
+                if(($certificados->sum('puntos') - $certificado->puntos + $request->detalle) > $certificado->detalle->subitem->puntos) {
+                    return back()->with('negacion', 'La sumatoria de puntajes no debe pasar a la del subitem. '
+                        . 'Puntaje de detalles subidos: ' . $certificados->sum('puntos') . ' vs Puntaje del merito: '
+                        . $certificado->detalle->subitem->puntos
                     );
                 } else {
                     $puntosAc = $certificado->puntos - $request->detalle;

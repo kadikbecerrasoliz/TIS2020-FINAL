@@ -19,7 +19,7 @@
         <div class="form-row">
             <div class="col">
                 <div class="md-form">
-                    <input type="text"  id="materialRegisterFormTitulo" class="form-control" aria-describedby="materialRegisterFormTituloHelpBlock" name="titulo" value="{{ $subitem->titulo }}" required>
+                    <input type="text" id="materialRegisterFormTitulo" class="form-control" aria-describedby="materialRegisterFormTituloHelpBlock" name="titulo" value="{{ $subitem->titulo }}" required>
                     <label for="materialRegisterFormTitulo">Titulo *</label>
                 </div>
             </div>
@@ -27,7 +27,7 @@
         <div class="form-row">
             <div class="col">
                 <div class="md-form">
-                    <input type="number"  id="materialRegisterFormpuntos" class="form-control" aria-describedby="materialRegisterFormpuntosHelpBlock" name="puntos" value="{{ $subitem->puntos }}" required>
+                    <input type="number" min="0" id="materialRegisterFormpuntos" class="form-control" aria-describedby="materialRegisterFormpuntosHelpBlock" name="puntos" value="{{ $subitem->puntos }}" required>
                     <label for="materialRegisterFormpuntos">Puntaje *</label>
                 </div>
             </div>

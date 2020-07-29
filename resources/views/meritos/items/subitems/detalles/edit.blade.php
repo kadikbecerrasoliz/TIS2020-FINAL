@@ -27,7 +27,7 @@
         <div class="form-row">
             <div class="col">
                 <div class="md-form">
-                    <input type="number"  id="materialRegisterFormpuntos" class="form-control" aria-describedby="materialRegisterFormpuntosHelpBlock" name="puntos" value="{{ $detalle->puntos }}" required>
+                    <input type="number"  min="0" id="materialRegisterFormpuntos" class="form-control" aria-describedby="materialRegisterFormpuntosHelpBlock" name="puntos" value="{{ $detalle->puntos }}" required>
                     <label for="materialRegisterFormpuntos">Puntaje *</label>
                 </div>
             </div>

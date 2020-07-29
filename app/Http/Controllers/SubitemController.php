@@ -60,7 +60,7 @@ class SubitemController extends Controller
     public function update(Request $request, $id)
     {
         $subitem = Subitem::find($id);
-        $item = Item::find('id', '=', $subitem->$item_id);
+        $item = Item::find($subitem->item_id);
         if($request->input('puntos') > $item->puntos) {
             return back()->with('negacion', 'El sub-item no puede ser mayor al puntaje de item.');
         } else if($request->input('puntos') < 0) {
