@@ -60,6 +60,6 @@ class FechaController extends Controller
     {
         $fecha = Fecha::where('id', '=', $id)->firstOrFail();
         $fecha->delete();
-        return back()->with('confirmacion','Evento Eliminado Corectamente');
+        return back()->with('confirmacion','Evento Eliminado Correctamente');
     }
 }

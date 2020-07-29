@@ -71,6 +71,6 @@ class MeritoController extends Controller
     {
         $merito = Merito::where('id', '=', $id)->firstOrFail();
         $merito->delete();
-        return back()->with('confirmacion','Merito Eliminado Corectamente');
+        return back()->with('confirmacion','Merito Eliminado Correctamente');
     }
 }

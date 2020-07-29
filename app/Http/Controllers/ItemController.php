@@ -81,6 +81,6 @@ class ItemController extends Controller
     {
         $item = Item::where('id', '=', $id)->firstOrFail();
         $item->delete();
-        return back()->with('confirmacion','Merito Eliminado Corectamente');
+        return back()->with('confirmacion','Merito Eliminado Correctamente');
     }
 }

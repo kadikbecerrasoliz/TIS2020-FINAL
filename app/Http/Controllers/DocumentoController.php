@@ -53,6 +53,6 @@ class DocumentoController extends Controller
     {
         $documento = Documento::where('id', '=', $id)->firstOrFail();
         $documento->delete();
-        return back()->with('confirmacion','Documento Eliminado Corectamente');
+        return back()->with('confirmacion','Documento Eliminado Correctamente');
     }
 }

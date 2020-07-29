@@ -209,7 +209,7 @@
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title w-100" id="exampleModalLabel">Elminar</h5>
+                                                        <h5 class="modal-title w-100" id="exampleModalLabel">Eliminar</h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
@@ -297,7 +297,7 @@
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title w-100" id="exampleModalLabel">Elminar Requisito</h5>
+                                                    <h5 class="modal-title w-100" id="exampleModalLabel">Eliminar Requisito</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
@@ -388,7 +388,7 @@
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title w-100" id="exampleModalLabel">Elminar Documento</h5>
+                                                    <h5 class="modal-title w-100" id="exampleModalLabel">Eliminar Documento</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
@@ -414,9 +414,9 @@
                 </tbody>
             </table>
         </div>
-        {{-- Fechas de pruebas --}}
+        {{-- Fechas de eventos --}}
         <div>
-            <h4><strong>Fecha de Pruebas</strong></h4>
+            <h4><strong>Fecha de Eventos</strong></h4>
             <table class="table table-sm table-hover table-bordered">
                 <thead class="thead-light">
                     <tr>
@@ -491,7 +491,7 @@
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title w-100" id="exampleModalLabel">Elminar Evento</h5>
+                                                    <h5 class="modal-title w-100" id="exampleModalLabel">Eliminar Evento</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
@@ -592,7 +592,7 @@
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title w-100" id="exampleModalLabel">Elminar Merito</h5>
+                                                    <h5 class="modal-title w-100" id="exampleModalLabel">Eliminar Merito</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
@@ -663,7 +663,7 @@
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title w-100" id="exampleModalLabel">Elminar Item</h5>
+                                                        <h5 class="modal-title w-100" id="exampleModalLabel">Eliminar Item</h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
@@ -734,7 +734,7 @@
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title w-100" id="exampleModalLabel">Elminar Subitem</h5>
+                                                            <h5 class="modal-title w-100" id="exampleModalLabel">Eliminar Subitem</h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
@@ -805,7 +805,7 @@
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title w-100" id="exampleModalLabel">Elminar Detalle</h5>
+                                                                <h5 class="modal-title w-100" id="exampleModalLabel">Eliminar Detalle</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>

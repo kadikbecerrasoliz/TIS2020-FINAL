@@ -317,6 +317,6 @@ class CertificadoController extends Controller
             $postulation->save();
         }
         $certificado->delete();
-        return back()->with('confirmacion','Certificado Eliminado Corectamente');
+        return back()->with('confirmacion','Certificado Eliminado Correctamente');
     }
 }

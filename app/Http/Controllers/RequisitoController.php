@@ -51,6 +51,6 @@ class RequisitoController extends Controller
     {
         $requisito = Requisito::where('id', '=', $id)->firstOrFail();
         $requisito->delete();
-        return back()->with('confirmacion','Requisito Eliminado Corectamente');
+        return back()->with('confirmacion','Requisito Eliminado Correctamente');
     }
 }

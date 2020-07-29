@@ -67,6 +67,6 @@ class UserController extends Controller
     {
         $user = User::where('id', '=', $id)->firstOrFail();
         $user->delete();
-        return back()->with('confirmacion','Usuario Eliminado Corectamente');
+        return back()->with('confirmacion','Usuario Eliminado Correctamente');
     }
 }

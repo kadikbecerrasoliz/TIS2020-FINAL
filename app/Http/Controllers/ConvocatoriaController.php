@@ -86,7 +86,7 @@ class ConvocatoriaController extends Controller
     {
         $convocatoria = Convocatoria::where('id', '=', $id)->firstOrFail();
         $convocatoria->delete();
-        return back()->with('confirmacion','Convocatoria Eliminado Corectamente');
+        return back()->with('confirmacion','Convocatoria Eliminado Correctamente');
     }
 
     public function view()

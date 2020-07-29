@@ -70,16 +70,16 @@
         </div>
         {{-- Documentos a presentar --}}
         <div>
-            <h4><strong>Documnetos a Presentar</strong></h4>
+            <h4><strong>Documentos a Presentar</strong></h4>
             <ul>
                 @foreach ($documentos as $documento)
                     <li>{{$documento->descripcion}} - {{$documento->importancia}}</li>
                 @endforeach
             </ul>
         </div>
-        {{-- Fecha de pruebas --}}
+        {{-- Fecha de eventos --}}
         <div>
-            <h4><strong>Fecha de Pruebas</strong></h4>
+            <h4><strong>Fecha de Eventos</strong></h4>
             <table class="table table-sm table-hover table-bordered">
                 <thead class="thead-light">
                     <tr>

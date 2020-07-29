@@ -77,6 +77,6 @@ class DetalleController extends Controller
     {
         $detalle = Detalle::where('id', '=', $id)->firstOrFail();
         $detalle->delete();
-        return back()->with('confirmacion','Detalle Eliminado Corectamente');
+        return back()->with('confirmacion','Detalle Eliminado Correctamente');
     }
 }

@@ -50,6 +50,6 @@ class TematicaController extends Controller
     {
         $tematica = Tematica::where('id', '=', $id)->firstOrFail();
         $tematica->delete();
-        return back()->with('confirmacion','Tematica Eliminada Corectamente');
+        return back()->with('confirmacion','Tematica Eliminada Correctamente');
     }
 }

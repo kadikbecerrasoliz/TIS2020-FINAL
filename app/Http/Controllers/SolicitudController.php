@@ -27,10 +27,10 @@ class SolicitudController extends Controller
         $acept = Solicitud::where('user_id','=',$user->id)->where('convocatoria_id','=',$request->convocatoria_id)->where('estado','=','2')->count();
         $envia = Solicitud::where('user_id','=',$user->id)->where('convocatoria_id','=',$request->convocatoria_id)->where('estado','=','1')->count();
         $rol = $user->roles->where('name','=','Postulante')->count();
-        
+
         if ($rol == 1) {
             if ($acept == 0 && $envia == 0) {
-                
+
                 $solicitud = new Solicitud();
                 $solicitud->estado="1";
                 $solicitud->convocatoria_id=$request->input('convocatoria_id');
@@ -45,7 +45,7 @@ class SolicitudController extends Controller
                     $solicitud->fill(['kardex' => asset($path)])->save();
                 }
                 $solicitud->save();
-        
+
                 return back()->with('confirmacion','Solicitud enviada Correctamente');
             } else {
                 return back()->with('negacion','Ya enviaste una Solicitud a esta convocatoria');
@@ -74,7 +74,7 @@ class SolicitudController extends Controller
         //
     }
 
-    
+
 
     public function apply($id)
     {
@@ -98,9 +98,9 @@ class SolicitudController extends Controller
                 return back()->with('negacion','Solicitud ya fue rechazada');
             }
         }
-        
 
-        
+
+
     }
     public function deny($id)
     {
@@ -109,8 +109,7 @@ class SolicitudController extends Controller
 
         if ($solicitud->estado == "1") {
 
-            $solicitud->estado="3";
-            $solicitud->save();
+            $solicitud->delete();
 
             return back()->with('confirmacion','Solicitud rechazada Correctamente');;
         } else {

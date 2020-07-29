@@ -57,13 +57,13 @@ class RoleController extends Controller
 
         $role->permissions()->sync($request->get('permissions'));
 
-        return back()->with('confirmacion','Rol Editado Corectamente');
+        return back()->with('confirmacion','Rol Editado Correctamente');
     }
 
     public function destroy($slug)
     {
         $role = Role::where('slug', '=', $slug)->firstOrFail();
         $role->delete();
-        return back()->with('confirmacion','Rol Eliminado Corectamente');
+        return back()->with('confirmacion','Rol Eliminado Correctamente');
     }
 }

@@ -52,6 +52,6 @@ class MateriaController extends Controller
     {
         $materia = Materia::where('id', '=', $id)->firstOrFail();
         $materia->delete();
-        return back()->with('confirmacion','Materia Eliminada Corectamente');
+        return back()->with('confirmacion','Materia Eliminada Correctamente');
     }
 }

@@ -80,6 +80,6 @@ class SubitemController extends Controller
     {
         $subitem = Subitem::where('id', '=', $id)->firstOrFail();
         $subitem->delete();
-        return back()->with('confirmacion','Subitem Eliminado Corectamente');
+        return back()->with('confirmacion','Subitem Eliminado Correctamente');
     }
 }

@@ -82,7 +82,7 @@ class ArchivoController extends Controller
     {
         $archivo = Archivo::where('id', '=', $id)->firstOrFail();
         $archivo->delete();
-        return back()->with('confirmacion','Archivo Eliminado Corectamente');
+        return back()->with('confirmacion','Archivo Eliminado Correctamente');
     }
 
     public function accept($id)

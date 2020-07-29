@@ -69,6 +69,6 @@ class RequerimientoTematicaController extends Controller
     {
         $requerimientoTematica = RequerimientoTematica::where('id', '=', $id)->firstOrFail();
         $requerimientoTematica->delete();
-        return back()->with('confirmacion','Item de conocimiento Eliminado Corectamente');
+        return back()->with('confirmacion','Item de conocimiento Eliminado Correctamente');
     }
 }
