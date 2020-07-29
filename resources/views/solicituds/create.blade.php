@@ -24,7 +24,7 @@
                     <div class="custom-file">
                       <input type="file" name="valorado" accept=".pdf" class="custom-file-input" id="inputGroupFile01"
                         aria-describedby="inputGroupFileAddon01">
-                      <label class="custom-file-label" for="inputGroupFile01">Escoger Archio</label>
+                      <label class="custom-file-label" for="inputGroupFile01">Escoger Archivo</label>
                     </div>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                     <div class="custom-file">
                       <input type="file" name="kardex" accept=".pdf"class="custom-file-input" id="inputGroupFile02"
                         aria-describedby="inputGroupFileAddon02">
-                      <label class="custom-file-label" for="inputGroupFile02">Escoger Archio</label>
+                      <label class="custom-file-label" for="inputGroupFile02">Escoger Archivo</label>
                     </div>
                 </div>
             </div>
