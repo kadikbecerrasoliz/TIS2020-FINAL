@@ -210,7 +210,7 @@ Route::middleware(['auth'])->group(function () {
 
 	//Calificaciones
 	Route::post('calificaciones/store/{postulation}/{requerimientoPostulations}', 'CalificacionController@store')->name('calificaciones.store')
-		->middleware('permission:certificados.create');
+		->middleware('permission:certificados.edit');
 	Route::put('calificaciones/{postulation}/{requerimientoPostulations}', 'CalificacionController@update')->name('calificaciones.update')
 		->middleware('permission:certificados.edit');
 });

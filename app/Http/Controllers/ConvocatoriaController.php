@@ -24,13 +24,23 @@ class ConvocatoriaController extends Controller
     }
     public function store(ConvocatoriaRequest $request)
     {
-        $convocatoria = new Convocatoria();
-        $convocatoria->titulo = $request->input('titulo');
-        $convocatoria->description = $request->input('description');
-        $convocatoria->fechaIni = $request->input('fechaIni');
-        $convocatoria->fechaFin = $request->input('fechaFin');
-        $convocatoria->save();
-        return back()->with('confirmacion','Convocatoria Registrado Correctamente');
+        $Dato1 = new Carbon($request->input('fechaIni'));
+        $Dato2 = new Carbon($request->input('fechaFin'));
+        $fechaini = $Dato1->format('d-m-Y');
+        $fechaFin = $Dato2->format('d-m-Y');
+        $fechaAct = Carbon::now()->format('d-m-Y');
+        if ($fechaini >= $fechaAct && $fechaini < $fechaFin) {
+            $convocatoria = new Convocatoria();
+            $convocatoria->titulo = $request->input('titulo');
+            $convocatoria->description = $request->input('description');
+            $convocatoria->fechaIni = $request->input('fechaIni');
+            $convocatoria->fechaFin = $request->input('fechaFin');
+            $convocatoria->save();
+            return back()->with('confirmacion','Convocatoria Registrado Correctamente');
+        } else {
+            return back()->with('negacion','Fecha de inicio incorrecta');
+        }
+
     }
     public function show($id)
     {
@@ -52,15 +62,24 @@ class ConvocatoriaController extends Controller
 
     public function update(ConvocatoriaRequest $request, $id)
     {
-        $convocatoria = Convocatoria::find($id);
+        $Dato1 = new Carbon($request->input('fechaIni'));
+        $Dato2 = new Carbon($request->input('fechaFin'));
+        $fechaini = $Dato1->format('d-m-Y');
+        $fechaFin = $Dato2->format('d-m-Y');
+        $fechaAct = Carbon::now()->format('d-m-Y');
+        if ($fechaini >= $fechaAct && $fechaini < $fechaFin) {
+            $convocatoria = Convocatoria::find($id);
 
-        $convocatoria->titulo = $request->input('titulo');
-        $convocatoria->description = $request->input('description');
-        $convocatoria->fechaIni = $request->input('fechaIni');
-        $convocatoria->fechaFin = $request->input('fechaFin');
-        $convocatoria->save();
+            $convocatoria->titulo = $request->input('titulo');
+            $convocatoria->description = $request->input('description');
+            $convocatoria->fechaIni = $request->input('fechaIni');
+            $convocatoria->fechaFin = $request->input('fechaFin');
+            $convocatoria->save();
+             return back()->with('confirmacion','Convocatoria Editado Correctamente');
+        } else {
+            return back()->with('negacion','Fecha de inicio incorrecta');
+        }
 
-        return back()->with('confirmacion','Convocatoria Editado Correctamente');
     }
 
     public function destroy($id)
