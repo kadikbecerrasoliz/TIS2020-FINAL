@@ -3,7 +3,7 @@
 @section('content')
 <div class="row m-0">
     <div class="col">
-        <h3>Listar Materias</h3>
+        <h3>Listar Materias/Auxiliaturas</h3>
     </div>
     @can('materias.create')
         <div class="col">

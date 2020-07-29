@@ -79,12 +79,12 @@ class PostulationController extends Controller
 
         if ($postulationRequerimiento->estado === 'En revision') {
 
-            $postulationRequerimiento->estado = 'Aprovado';
+            $postulationRequerimiento->estado = 'Aprobado';
             $postulationRequerimiento->save();
 
             return back()->with('confirmacion','Postulacion a requerimiento aceptado Correctamente');;
         } else {
-            if ($postulationRequerimiento->estado == 'Aprovado') {
+            if ($postulationRequerimiento->estado == 'Aprobado') {
                 return back()->with('negacion','Postulacion a requerimiento ya fue aceptado');
             } else {
                 return back()->with('negacion','Postulacion a requerimiento ya fue rechazado');
@@ -105,7 +105,7 @@ class PostulationController extends Controller
 
             return back()->with('confirmacion','Postulacion a requerimiento rechazado Correctamente');;
         } else {
-            if ($postulationRequerimiento->estado == 'Aprovado') {
+            if ($postulationRequerimiento->estado == 'Aprobado') {
                 return back()->with('negacion','Postulacion a requerimiento ya fue aceptado');
             } else {
                 return back()->with('negacion','Postulacion a requerimiento ya fue rechazado');

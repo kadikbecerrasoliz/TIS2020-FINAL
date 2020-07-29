@@ -35,7 +35,7 @@
                             <th class="text-center">Requerimiento</th>
                             <th class="text-center">Puntos</th>
                             @can('solicituds.create')
-                                <th class="text-center">Postulacion</th>
+                                <th class="text-center">Estado de postulacion</th>
                             @endcan
                         </tr>
                     </thead>
@@ -54,7 +54,7 @@
                                         </td>
                                     @endcan
                                 @else
-                                    @if($postulation->postulationRequerimientos->where('requerimiento_id', $requerimiento->id)->first()->estado === 'Aprovado')
+                                    @if($postulation->postulationRequerimientos->where('requerimiento_id', $requerimiento->id)->first()->estado === 'Aprobado')
                                         <td style="color: green" class="text-center">
                                             {{$postulation->postulationRequerimientos->where('requerimiento_id', $requerimiento->id)->first()->estado}}
                                         </td>
@@ -379,20 +379,39 @@
                     <thead class="thead-light">
                         <tr>
                             <th class="text-center">
-                                <strong>Postulante</strong>
+                                <strong>Requerimiento</strong>
                             </th>
                             <th class="text-center">
-                                <strong>Fecha de subscripcion</strong>
+                                <strong>Fecha de revision</strong>
                             </th>
                             <th class="text-center">
                                 <strong>Puntaje certificados</strong>
                             </th>
                             <th class="text-center">
-                                <strong>Puntaje examen</strong>
+                                <strong>Puntaje conocimientos</strong>
                             </th>
                         </tr>
                     </thead>
-
+                    <tbody>
+                        @foreach($postulation->postulationRequerimientos as $postulationRequerimiento)
+                            @foreach($postulationRequerimiento->calificaciones as $calificacion)
+                                <tr>
+                                    <td class="text-center">
+                                        <strong>{{$postulationRequerimiento->requerimiento->materia->name}}</strong>
+                                    </td>
+                                    <td class="text-center">
+                                        <strong>{{$calificacion->created_at}}</strong>
+                                    </td>
+                                    <td class="text-center">
+                                        <strong>{{$postulation->puntaje_certificados}}</strong>
+                                    </td>
+                                    <td class="text-center">
+                                        <strong>{{$calificacion->puntaje_final}}</strong>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endforeach
+                    </tbody>
                 </table>
             </div>
         @else

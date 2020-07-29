@@ -1,5 +1,5 @@
 <div class="modal-header text-center">
-    <h5 class="modal-title w-100" id="exampleModalLabel">Editar Materia</h5>
+    <h5 class="modal-title w-100" id="exampleModalLabel">Editar Materia/Auxiliatura</h5>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
@@ -12,7 +12,7 @@
             <div class="col">
                 <div class="md-form">
                     <input type="text" id="materialRegisterFormName" class="form-control" aria-describedby="materialRegisterFormNameHelpBlock" name="name" value="{{$materia->name}}" required autofocus>
-                    <label for="materialRegisterFormName">Nombre de Materia *</label>
+                    <label for="materialRegisterFormName">Nombre de Materia/Auxiliatura *</label>
                 </div>
             </div>
         </div>
@@ -20,7 +20,7 @@
             <div class="col">
                 <div class="md-form">
                     <input type="text" id="materialRegisterFormName" class="form-control" aria-describedby="materialRegisterFormNameHelpBlock" name="codigo" value="{{$materia->codigo}}" required autofocus>
-                    <label for="materialRegisterFormName">Codigo de Materia *</label>
+                    <label for="materialRegisterFormName">Codigo de Materia/Auxiliatura *</label>
                 </div>
             </div>
         </div>

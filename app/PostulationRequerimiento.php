@@ -17,4 +17,8 @@ class PostulationRequerimiento extends Model
         return $this->belongsTo(Postulation::class);
     }
 
+    public function calificaciones()
+    {
+        return $this->hasMany(Calificacion::class);
+    }
 }

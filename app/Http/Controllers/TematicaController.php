@@ -21,7 +21,6 @@ class TematicaController extends Controller
     public function store(Request $request)
     {
         $tematica = new Tematica();
-        $tematica->codigo = $request->input('codigo');
         $tematica->name = $request->input('name');
         $tematica->save();
         return back()->with('confirmacion','Tematica Registrada Correctamente');
@@ -41,7 +40,6 @@ class TematicaController extends Controller
     {
         $tematica = Tematica::find($id);
 
-        $tematica->codigo = $request->input('codigo');
         $tematica->name = $request->input('name');
         $tematica->save();
 

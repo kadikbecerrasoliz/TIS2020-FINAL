@@ -16,7 +16,6 @@ class CreateTematicas extends Migration
         Schema::create('tematicas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('codigo');
 
             $table->timestamps();
         });

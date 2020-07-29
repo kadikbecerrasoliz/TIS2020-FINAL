@@ -16,7 +16,7 @@
     @can('materias.index')
         <a class="list-group-item list-group-item-action" href="{{ route('materias.index') }}">
             <span class="text-left">
-                <i class="fas fa-pen-alt"></i> Materia
+                <i class="fas fa-pen-alt"></i> Materias/Auxiliaturas
             </span>
         </a>
     @endcan

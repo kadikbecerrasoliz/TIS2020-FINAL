@@ -16,14 +16,6 @@
                 </div>
             </div>
         </div>
-        <div class="form-row">
-            <div class="col">
-                <div class="md-form">
-                    <input type="text" id="tematicalRegisterFormName" class="form-control" aria-describedby="tematicalRegisterFormNameHelpBlock" name="codigo" value="{{$tematica->codigo}}" required autofocus>
-                    <label for="tematicalRegisterFormName">Codigo de tematica *</label>
-                </div>
-            </div>
-        </div>
         <div class="d-flex justify-content-center">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
             <button class="btn btn-primary waves-effect" type="submit" data-toggle="modal">Registrar</button>

@@ -24,14 +24,14 @@
     @include('opcion.error')
     @include('opcion.validacion')
     @include('opcion.confirmacion')
-    <table class="table table-sm table-hover table-bordered">
+    <table class="table table-sm table-hover table-bordered" width="200px">
         <thead class="thead-light">
             <tr>
-                <th>
-                    <strong>Codigo</strong>
+                <th class="text-center">
+                    <strong>N#</strong>
                 </th>
-                <th>
-                    <strong>Nombre</strong>
+                <th class="text-center">
+                    <strong>Nombre de la tematica</strong>
                 </th>
                 @can('tematicas.show')
                     <th class="text-center">
@@ -53,8 +53,12 @@
         <tbody>
             @foreach ($tematicas as $tematica)
                 <tr>
-                    <td>{{$tematica->codigo}}</td>
-                    <td>{{$tematica->name}}</td>
+                    <td class="text-center">
+                        <strong>{{$tematica->id}}</strong>
+                    </td>
+                    <td>
+                        <strong>{{$tematica->name}}</strong>
+                    </td>
                     @can('tematicas.show')
                         <td class="text-center" width="10px">
                             <button type="button" class="btn btn-info px-3 btn-sm" data-toggle="modal" data-target="#Showtematica{{$tematica->id}}"><i class="fas fa-eye"></i></button>

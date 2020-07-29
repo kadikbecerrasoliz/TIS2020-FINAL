@@ -207,4 +207,10 @@ Route::middleware(['auth'])->group(function () {
 		->middleware('permission:tematicas.edit');
 	Route::delete('tematicas/{tematica}', 'TematicaController@destroy')->name('tematicas.destroy')
 		->middleware('permission:tematicas.destroy');
+
+	//Calificaciones
+	Route::post('calificaciones/store/{postulation}/{requerimientoPostulations}', 'CalificacionController@store')->name('calificaciones.store')
+		->middleware('permission:certificados.create');
+	Route::put('calificaciones/{postulation}/{requerimientoPostulations}', 'CalificacionController@update')->name('calificaciones.update')
+		->middleware('permission:certificados.edit');
 });
