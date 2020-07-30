@@ -87,17 +87,16 @@ class CertificadoController extends Controller
                     $certificado->detalle_id=$request->input('detalle_id');
                     $certificado->postulation_id=$postulation->id;
 
-                    if($certificados->count() === 0) {
+                    $puntajeItems = 0;
+
+                    foreach($merito->items as $item1) {
+                        $puntajeItems += $item1->certificados->where('postulation_id', $postulation->id)->sum('puntos');
+                    }
+
+                    if(($puntajeItems + $item->puntos) <= $merito->puntos) {
                         $certificado->puntos = $item->puntos;
                         $postulation->puntaje_certificados += $item->puntos;
                         $postulation->save();
-                    } else {
-                        $puntajeAc = $certificados->sum('puntos') + $item->puntos;
-                        if($puntajeAc <= $item->merito->puntos) {
-                            $certificado->puntos = $item->puntos;
-                            $postulation->puntaje_certificados += $item->puntos;
-                            $postulation->save();
-                        }
                     }
 
                     if($request->file('file')){
@@ -131,17 +130,16 @@ class CertificadoController extends Controller
                         $certificado->detalle_id=$request->input('detalle_id');
                         $certificado->postulation_id=$postulation->id;
 
-                        if($certificados->count() === 0) {
+                        $puntajeSubItems = 0;
+
+                        foreach($item->subitems as $subitem1) {
+                            $puntajeSubItems += $subitem1->certificados->where('postulation_id', $postulation->id)->sum('puntos');
+                        }
+
+                        if(($puntajeSubItems + $subitem->puntos) <= $item->puntos) {
                             $certificado->puntos = $subitem->puntos;
                             $postulation->puntaje_certificados += $subitem->puntos;
                             $postulation->save();
-                        } else {
-                            $puntajeAc = $certificados->sum('puntos') + $subitem->puntos;
-                            if($puntajeAc <= $subitem->item->puntos) {
-                                $certificado->puntos = $subitem->puntos;
-                                $postulation->puntaje_certificados += $subitem->puntos;
-                                $postulation->save();
-                            }
                         }
 
                         if($request->file('file')){
@@ -176,17 +174,16 @@ class CertificadoController extends Controller
                             $certificado->detalle_id=$request->input('detalle_id');
                             $certificado->postulation_id=$postulation->id;
 
-                            if($certificados->count() === 0) {
+                            $puntajeDetalles = 0;
+
+                            foreach($subitem->detalles as $detalle1) {
+                                $puntajeDetalles += $detalle1->certificados->where('postulation_id', $postulation->id)->sum('puntos');
+                            }
+
+                            if(($puntajeDetalles + $detalle->puntos) <= $subitem->puntos) {
                                 $certificado->puntos = $detalle->puntos;
                                 $postulation->puntaje_certificados += $detalle->puntos;
                                 $postulation->save();
-                            } else {
-                                $puntajeAc = $certificados->sum('puntos') + $detalle->puntos;
-                                if($puntajeAc <= $detalle->subitem->puntos) {
-                                    $certificado->puntos = $detalle->puntos;
-                                    $postulation->puntaje_certificados += $detalle->puntos;
-                                    $postulation->save();
-                                }
                             }
 
                             if($request->file('file')){

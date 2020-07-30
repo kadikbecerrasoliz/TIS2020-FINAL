@@ -26,10 +26,10 @@ class ConvocatoriaController extends Controller
     {
         $Dato1 = new Carbon($request->input('fechaIni'));
         $Dato2 = new Carbon($request->input('fechaFin'));
-        $fechaini = $Dato1->format('d-m-Y');
-        $fechaFin = $Dato2->format('d-m-Y');
-        $fechaAct = Carbon::now()->format('d-m-Y');
-        if ($fechaini >= $fechaAct && $fechaini < $fechaFin) {
+        $fechaini = $Dato1;
+        $fechaFin = $Dato2;
+        $fechaAct = Carbon::now();
+        if ($fechaini->gte($fechaAct) && $fechaini->lt($fechaFin)) {
             $convocatoria = new Convocatoria();
             $convocatoria->titulo = $request->input('titulo');
             $convocatoria->description = $request->input('description');
@@ -64,10 +64,10 @@ class ConvocatoriaController extends Controller
     {
         $Dato1 = new Carbon($request->input('fechaIni'));
         $Dato2 = new Carbon($request->input('fechaFin'));
-        $fechaini = $Dato1->format('d-m-Y');
-        $fechaFin = $Dato2->format('d-m-Y');
-        $fechaAct = Carbon::now()->format('d-m-Y');
-        if ($fechaini >= $fechaAct && $fechaini < $fechaFin) {
+        $fechaini = $Dato1;
+        $fechaFin = $Dato2;
+        $fechaAct = Carbon::now();
+        if ($fechaini->gte($fechaAct) && $fechaini->lt($fechaFin)) {
             $convocatoria = Convocatoria::find($id);
 
             $convocatoria->titulo = $request->input('titulo');
