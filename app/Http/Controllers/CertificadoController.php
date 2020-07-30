@@ -97,6 +97,10 @@ class CertificadoController extends Controller
                         $certificado->puntos = $item->puntos;
                         $postulation->puntaje_certificados += $item->puntos;
                         $postulation->save();
+                    } else if(($merito->puntos - $puntajeItems) < $item->puntos) {
+                        $certificado->puntos = $merito->puntos - $puntajeItems;
+                        $postulation->puntaje_certificados += $merito->puntos - $puntajeItems;
+                        $postulation->save();
                     }
 
                     if($request->file('file')){
@@ -139,6 +143,10 @@ class CertificadoController extends Controller
                         if(($puntajeSubItems + $subitem->puntos) <= $item->puntos) {
                             $certificado->puntos = $subitem->puntos;
                             $postulation->puntaje_certificados += $subitem->puntos;
+                            $postulation->save();
+                        } else if(($item->puntos - $puntajeSubItems) < $subitem->puntos) {
+                            $certificado->puntos = $item->puntos - $puntajeSubItems;
+                            $postulation->puntaje_certificados += $item->puntos - $puntajeSubItems;
                             $postulation->save();
                         }
 
@@ -183,6 +191,10 @@ class CertificadoController extends Controller
                             if(($puntajeDetalles + $detalle->puntos) <= $subitem->puntos) {
                                 $certificado->puntos = $detalle->puntos;
                                 $postulation->puntaje_certificados += $detalle->puntos;
+                                $postulation->save();
+                            } else if(($subitem->puntos - $puntajeDetalles) < $detalle->puntos) {
+                                $certificado->puntos = $subitem->puntos - $puntajeDetalles;
+                                $postulation->puntaje_certificados += $subitem->puntos - $puntajeDetalles;
                                 $postulation->save();
                             }
 
