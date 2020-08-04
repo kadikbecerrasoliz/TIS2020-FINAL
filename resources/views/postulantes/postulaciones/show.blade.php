@@ -390,6 +390,9 @@
                             <th class="text-center">
                                 <strong>Puntaje conocimientos</strong>
                             </th>
+                            <th class="text-center">
+                                <strong>Puntaje final</strong>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -407,6 +410,9 @@
                                     </td>
                                     <td class="text-center">
                                         <strong>{{$calificacion->puntaje_final}}</strong>
+                                    </td>
+                                    <td class="text-center">
+                                        <strong>{{$calificacion->puntaje_porcentual}}</strong>
                                     </td>
                                 </tr>
                             @endforeach

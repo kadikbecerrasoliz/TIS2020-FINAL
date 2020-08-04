@@ -19,6 +19,7 @@ class CreateConvocatoriasTable extends Migration
             $table->text('description');
             $table->string('fechaIni');
             $table->string('fechaFin');
+            $table->integer('porcentaje_conocimientos')->default('80');
             $table->timestamps();
         });
     }

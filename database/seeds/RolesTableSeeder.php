@@ -73,6 +73,18 @@ class RolesTableSeeder extends Seeder
             'permission_id'    => '33',
             'role_id'=> '3',
         ));
+        \DB::table('permission_role')->insert(array(
+            'permission_id'    => '39',
+            'role_id'=> '3',
+        ));
+        \DB::table('permission_role')->insert(array(
+            'permission_id'    => '40',
+            'role_id'=> '3',
+        ));
+        \DB::table('permission_role')->insert(array(
+            'permission_id'    => '41',
+            'role_id'=> '3',
+        ));
 
         //Comisionario
         Role::create([
@@ -114,6 +126,18 @@ class RolesTableSeeder extends Seeder
         ));
         \DB::table('permission_role')->insert(array(
             'permission_id'    => '33',
+            'role_id'=> '4',
+        ));
+        \DB::table('permission_role')->insert(array(
+            'permission_id'    => '39',
+            'role_id'=> '4',
+        ));
+        \DB::table('permission_role')->insert(array(
+            'permission_id'    => '40',
+            'role_id'=> '4',
+        ));
+        \DB::table('permission_role')->insert(array(
+            'permission_id'    => '41',
             'role_id'=> '4',
         ));
     }

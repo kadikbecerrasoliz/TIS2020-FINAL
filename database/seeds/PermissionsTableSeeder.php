@@ -223,5 +223,25 @@ class PermissionsTableSeeder extends Seeder
             'slug'  => 'tematicas.show',
             'description'  => 'Ver perfil todas las tematicas del sistema',
         ]);
+
+
+        //Calificaciones
+        Permission::create([
+            'name'  => 'Ver lista de calificaciones',
+            'slug'  => 'calificaciones.index',
+            'description'  => 'Ver lista de todas las calificaciones del sistema',
+        ]);
+
+        Permission::create([
+            'name'  => 'Ver calificacion',
+            'slug'  => 'calificaciones.show',
+            'description'  => 'Ver perfil de calificacion',
+        ]);
+
+        Permission::create([
+            'name'  => 'Editar calificacion',
+            'slug'  => 'calificaciones.edit',
+            'description'  => 'Editar calificacion',
+        ]);
     }
 }

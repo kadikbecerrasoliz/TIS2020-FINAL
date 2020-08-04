@@ -62,6 +62,8 @@ Route::middleware(['auth'])->group(function () {
 		->middleware('permission:convocatorias.index');
 	Route::get('convocatorias/revision', 'ConvocatoriaController@showVistaParaRevision')->name('convocatorias.revision.index')
 		->middleware('permission:archivos.show');
+	Route::get('convocatorias/requerimientos', 'ConvocatoriaController@showVistaParaRequerimiento')->name('convocatorias.requerimientos.index')
+		->middleware('permission:calificaciones.index');
 	Route::post('convocatorias/store', 'ConvocatoriaController@store')->name('convocatorias.store')
 	->middleware('permission:convocatorias.create');
 	Route::put('convocatorias/{convocatoria}', 'ConvocatoriaController@update')->name('convocatorias.update')
@@ -72,6 +74,8 @@ Route::middleware(['auth'])->group(function () {
 		->middleware('permission:convocatorias.show');
 
 	//Requerimientos
+	Route::get('convocatorias/{convocatoria}/requerimientos', 'RequerimientoController@showRequerimientosPerConvocatoria')->name('convocatorias.requerimientos')
+		->middleware('permission:calificaciones.index');
 	Route::post('requerimientos/store', 'RequerimientoController@store')->name('requerimientos.store')
 		->middleware('permission:convocatorias.create');
 	Route::put('requerimientos/{requerimiento}', 'RequerimientoController@update')->name('requerimientos.update')
@@ -209,6 +213,8 @@ Route::middleware(['auth'])->group(function () {
 		->middleware('permission:tematicas.destroy');
 
 	//Calificaciones
+	Route::get('requerimientos/{requerimiento}/calificaciones', 'CalificacionController@showCalificacionesPerRequerimiento')->name('requerimientos.calificaciones')
+		->middleware('permission:calificaciones.index');
 	Route::post('calificaciones/store/{postulation}/{requerimientoPostulations}', 'CalificacionController@store')->name('calificaciones.store')
 		->middleware('permission:certificados.edit');
 	Route::put('calificaciones/{postulation}/{requerimientoPostulations}', 'CalificacionController@update')->name('calificaciones.update')

@@ -55,6 +55,13 @@
             </span>
         </a>
     @endcan
+    @can('calificaciones.index')
+        <a class="list-group-item list-group-item-action" href="{{ route('convocatorias.requerimientos.index') }}">
+            <span class="text-left">
+                <i class="fas fa-pen-alt"></i> Calificaciones
+            </span>
+        </a>
+    @endcan
     <div><hr></div>
     @can('postulantes.index')
         <a class="list-group-item list-group-item-action" data-toggle="collapse" data-target="#collapsePost" aria-expanded="true" aria-controls="collapsePost">

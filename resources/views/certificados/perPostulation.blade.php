@@ -68,7 +68,7 @@
 
             {{-- Tabla de calificaciones del postulante --}}
             <div>
-                <h4><strong>Tabla de calificaciones</strong></h4>
+                <h4><strong>Tabla de calificacion de conocimientos</strong></h4>
                 <table class="table table-sm table-hover table-bordered">
                     <thead class="thead-light">
                         <tr>
@@ -83,7 +83,7 @@
                             </th>
                             @can('certificados.edit')
                                 <th class="text-center">
-                                    <strong>Editar</strong>
+                                    <strong>Calificar</strong>
                                 </th>
                             @endcan
                         </tr>

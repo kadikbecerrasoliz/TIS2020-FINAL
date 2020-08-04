@@ -37,6 +37,23 @@
                 </div>
             </div>
         </div>
+        <div class="form-row">
+            <div class="col">
+                <div class="md-form">
+                    <input
+                        type="number"
+                        id="materialRegisterFormPorcentaje"
+                        class="form-control"
+                        aria-describedby="materialRegisterFormNameHelpBlock"
+                        name="porcentaje_conocimientos"
+                        max="100"
+                        min="1"
+                        required autofocus
+                    >
+                    <label for="materialRegisterFormPorcentaje">Porcentaje de conocimientos *</label>
+                </div>
+            </div>
+        </div>
         <div class="d-flex justify-content-center">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
             <button class="btn btn-primary waves-effect" type="submit" data-toggle="modal">Registrar</button>

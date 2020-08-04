@@ -35,6 +35,7 @@ class ConvocatoriaController extends Controller
             $convocatoria->description = $request->input('description');
             $convocatoria->fechaIni = $request->input('fechaIni');
             $convocatoria->fechaFin = $request->input('fechaFin');
+            $convocatoria->porcentaje_conocimientos = $request->input('porcentaje_conocimientos');
             $convocatoria->save();
             return back()->with('confirmacion','Convocatoria Registrado Correctamente');
         } else {
@@ -62,18 +63,22 @@ class ConvocatoriaController extends Controller
 
     public function update(ConvocatoriaRequest $request, $id)
     {
+        $convocatoria = Convocatoria::find($id);
+
         $Dato1 = new Carbon($request->input('fechaIni'));
         $Dato2 = new Carbon($request->input('fechaFin'));
         $fechaini = $Dato1;
         $fechaFin = $Dato2;
         $fechaAct = Carbon::now();
-        if ($fechaini->gte($fechaAct) && $fechaini->lt($fechaFin)) {
+        if ($fechaini->gte($convocatoria->fechaIni) && $fechaini->lt($fechaFin)) {
             $convocatoria = Convocatoria::find($id);
 
             $convocatoria->titulo = $request->input('titulo');
             $convocatoria->description = $request->input('description');
             $convocatoria->fechaIni = $request->input('fechaIni');
             $convocatoria->fechaFin = $request->input('fechaFin');
+            $convocatoria->fechaFin = $request->input('fechaFin');
+            $convocatoria->porcentaje_conocimientos = $request->input('porcentaje_conocimientos');
             $convocatoria->save();
              return back()->with('confirmacion','Convocatoria Editado Correctamente');
         } else {
@@ -114,5 +119,11 @@ class ConvocatoriaController extends Controller
     {
         $convocatorias = Convocatoria::orderBy('titulo')->get();
         return view('convocatorias.revision.index', compact('convocatorias'));
+    }
+
+    public function showVistaParaRequerimiento()
+    {
+        $convocatorias = Convocatoria::orderBy('titulo')->get();
+        return view('convocatorias.requerimientos.index', compact('convocatorias'));
     }
 }

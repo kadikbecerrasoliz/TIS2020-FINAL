@@ -15,7 +15,8 @@ class CreateCalificaciones extends Migration
     {
         Schema::create('calificacions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('puntaje_final');
+            $table->integer('puntaje_final');
+            $table->integer('puntaje_porcentual')->default('0');
 
             $table->integer('postulation_requerimiento_id')->unsigned()->nullable();
             $table->integer('postulation_id')->unsigned()->nullable();

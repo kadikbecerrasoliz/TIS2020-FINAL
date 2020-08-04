@@ -76,4 +76,9 @@ class RequerimientoController extends Controller
         $postulationReq->save();
         return redirect()->back()->with('confirmacion','Postulacion enviado Correctamente');
     }
+
+    public function showRequerimientosPerConvocatoria($convocatoria_id) {
+        $requerimientos = Requerimiento::where('convocatoria_id', '=', $convocatoria_id)->get();
+        return view('requerimientos.perConvocatoria', compact('requerimientos'));
+    }
 }
