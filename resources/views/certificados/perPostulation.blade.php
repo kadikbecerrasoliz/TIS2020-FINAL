@@ -44,7 +44,7 @@
                                     {{$postulationRequerimiento->requerimiento->materia->name}}
                                 </td>
                                 <td class="text-center">
-                                    {{$postulationRequerimiento->created_at}}
+                                    {{$postulationRequerimiento->created_at->format('Y-m-d')}}
                                 </td>
                                 @can('certificados.edit')
                                     <td class="text-center">

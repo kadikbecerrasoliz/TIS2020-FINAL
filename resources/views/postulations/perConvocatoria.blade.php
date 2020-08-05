@@ -38,7 +38,7 @@
                 @foreach ($postulations as $postulation)
                     <tr>
                         <td>{{$postulation->user->name}} {{$postulation->user->apellido}}</td>
-                        <td>{{$postulation->created_at}}</td>
+                        <td>{{$postulation->created_at->format('Y-m-d')}}</td>
                         @can('archivos.show')
                             <td class="text-center">
                                 <a href="{{ route('archivos.perPostulation', $postulation->id) }}">
