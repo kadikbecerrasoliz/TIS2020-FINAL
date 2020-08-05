@@ -95,7 +95,7 @@
                                     {{$postulationRequerimiento->requerimiento->materia->name}}
                                 </td>
                                 <td class="text-center">
-                                    {{$postulationRequerimiento->created_at}}
+                                    {{$postulationRequerimiento->created_at->format('Y-m-d')}}
                                 </td>
                                 <td class="text-center">
                                     @foreach($postulation->calificaciones->where('postulation_requerimiento_id', $postulationRequerimiento->id) as $calificacion)
