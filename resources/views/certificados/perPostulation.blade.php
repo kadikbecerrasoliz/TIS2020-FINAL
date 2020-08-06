@@ -169,7 +169,7 @@
                                 </div>
                             </td>
                             <td>
-                                @foreach ($merito->certificados as $certificado)
+                                @foreach ($merito->certificados->where('postulation_id', $postulation->id) as $certificado)
                                     <li class="d-flex">
                                         <a href="{{ $certificado->file }}">{{ $certificado->name }} ({{ $certificado->puntos }} Pts.)</a>
                                         <button type="button" class="btn btn-warning px-3 btn-sm" data-toggle="modal" data-target="#EditConv{{$certificado->id}}"><i class="fas fa-edit"></i></button>
@@ -184,8 +184,8 @@
                                 @endforeach
                             </td>
                             <td class="text-center">
-                                @if ($merito->items->count() === 0)
-                                    {{$merito->certificados->sum('puntos')}}
+                                @if ($postulation->certificados->where('merito_id', $merito->id)->count() !== 0)
+                                    {{$postulation->certificados->where('merito_id', $merito->id)->sum('puntos')}}
                                 @endif
                             </td>
                         </tr>
@@ -200,7 +200,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    @foreach ($item->certificados as $certificado)
+                                    @foreach ($item->certificados->where('postulation_id', $postulation->id) as $certificado)
                                         <li class="d-flex">
                                             <a href="{{ $certificado->file }}">{{ $certificado->name }} ({{ $certificado->puntos }} Pts.)</a>
                                             <button type="button" class="btn btn-warning px-3 btn-sm" data-toggle="modal" data-target="#EditConv{{$certificado->id}}"><i class="fas fa-edit"></i></button>
@@ -215,8 +215,8 @@
                                     @endforeach
                                 </td>
                                 <td class="text-center">
-                                    @if ($item->subitems->count() === 0)
-                                        {{$item->certificados->sum('puntos')}}
+                                    @if ($postulation->certificados->where('item_id', $item->id)->count() !== 0)
+                                        {{$postulation->certificados->where('item_id', $item->id)->sum('puntos')}}
                                     @endif
                                 </td>
                             </tr>
@@ -231,7 +231,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        @foreach ($subitem->certificados as $certificado)
+                                        @foreach ($subitem->certificados->where('postulation_id', $postulation->id) as $certificado)
                                             <li class="d-flex">
                                                 <a href="{{ $certificado->file }}">{{ $certificado->name }} ({{ $certificado->puntos }} Pts.)</a>
                                                 <button type="button" class="btn btn-warning px-3 btn-sm" data-toggle="modal" data-target="#EditConv{{$certificado->id}}"><i class="fas fa-edit"></i></button>
@@ -246,8 +246,8 @@
                                         @endforeach
                                     </td>
                                     <td class="text-center">
-                                        @if ($subitem->detalles->count() === 0)
-                                            {{$subitem->certificados->sum('puntos')}}
+                                        @if ($postulation->certificados->where('subitem_id', $subitem->id)->count() !== 0)
+                                            {{$postulation->certificados->where('subitem_id', $subitem->id)->sum('puntos')}}
                                         @endif
                                     </td>
                                 </tr>
@@ -262,7 +262,7 @@
                                             </div>
                                         </td>
                                         <td>
-                                            @foreach ($detalle->certificados as $certificado)
+                                            @foreach ($detalle->certificados->where('postulation_id', $postulation->id) as $certificado)
                                                 <li class="d-flex">
                                                     <a href="{{ $certificado->file }}">{{ $certificado->name }} ({{ $certificado->puntos }} Pts.)</a>
                                                     <button type="button" class="btn btn-warning px-3 btn-sm" data-toggle="modal" data-target="#EditConv{{$certificado->id}}"><i class="fas fa-edit"></i></button>
@@ -277,7 +277,9 @@
                                             @endforeach
                                         </td>
                                         <td class="text-center">
-                                            {{$detalle->certificados->sum('puntos')}}
+                                            @if ($postulation->certificados->where('detalle_id', $detalle->id)->count() !== 0)
+                                                {{$postulation->certificados->where('detalle_id', $detalle->id)->sum('puntos')}}
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

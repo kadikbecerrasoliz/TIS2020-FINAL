@@ -205,7 +205,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        @foreach ($merito->certificados as $certificado)
+                                        @foreach ($merito->certificados->where('postulation_id', $postulation->id) as $certificado)
                                             <li class="d-flex">
                                                 <a href="{{ $certificado->file }}">{{ $certificado->name }}</a>
                                                 <form action="{{ route('certificados.destroy', $certificado->id) }}" method="POST">
@@ -217,13 +217,13 @@
                                         @endforeach
                                     </td>
                                     <td class="text-center">
-                                        @if ($merito->certificados->count() != 0)
-                                            {{$merito->certificados->count() * $merito->puntos}}
+                                        @if ($merito->certificados->where('postulation_id', $postulation->id)->count() !== 0)
+                                            {{$merito->certificados->where('postulation_id', $postulation->id)->count() * $merito->puntos}}
                                         @endif
                                     </td>
                                     <td class="text-center">
                                         @if ($merito->items->count() === 0)
-                                            {{$merito->certificados->sum('puntos')}}
+                                            {{$merito->certificados->where('postulation_id', $postulation->id)->sum('puntos')}}
                                         @endif
                                     </td>
                                 @endcan
@@ -252,7 +252,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                            @foreach ($item->certificados as $certificado)
+                                            @foreach ($item->certificados->where('postulation_id', $postulation->id) as $certificado)
                                                 <li class="d-flex">
                                                     <a href="{{ $certificado->file }}">{{ $certificado->name }}</a>
                                                     <form action="{{ route('certificados.destroy', $certificado->id) }}" method="POST">
@@ -264,13 +264,13 @@
                                             @endforeach
                                         </td>
                                         <td class="text-center">
-                                            @if ($item->certificados->count() != 0)
-                                                {{$item->certificados->count() * $item->puntos}}
+                                            @if ($item->certificados->where('postulation_id', $postulation->id)->count() !== 0)
+                                                {{$item->certificados->where('postulation_id', $postulation->id)->count() * $item->puntos}}
                                             @endif
                                         </td>
                                         <td class="text-center">
                                             @if ($item->subitems->count() === 0)
-                                                {{$item->certificados->sum('puntos')}}
+                                                {{$item->certificados->where('postulation_id', $postulation->id)->sum('puntos')}}
                                             @endif
                                         </td>
                                     @endcan
@@ -299,7 +299,7 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                @foreach ($subitem->certificados as $certificado)
+                                                @foreach ($subitem->certificados->where('postulation_id', $postulation->id) as $certificado)
                                                     <li class="d-flex">
                                                         <a href="{{ $certificado->file }}">{{ $certificado->name }}</a>
                                                         <form action="{{ route('certificados.destroy', $certificado->id) }}" method="POST">
@@ -311,13 +311,13 @@
                                                 @endforeach
                                             </td>
                                             <td class="text-center">
-                                                @if ($subitem->certificados->count() != 0)
-                                                    {{$subitem->certificados->count() * $subitem->puntos}}
+                                                @if ($subitem->certificados->where('postulation_id', $postulation->id)->count() !== 0)
+                                                    {{$subitem->certificados->where('postulation_id', $postulation->id)->count() * $subitem->puntos}}
                                                 @endif
                                             </td>
                                             <td class="text-center">
                                                 @if ($subitem->detalles->count() === 0)
-                                                    {{$subitem->certificados->sum('puntos')}}
+                                                    {{$subitem->certificados->where('postulation_id', $postulation->id)->sum('puntos')}}
                                                 @endif
                                             </td>
                                         @endcan
@@ -344,7 +344,7 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    @foreach ($detalle->certificados as $certificado)
+                                                    @foreach ($detalle->certificados->where('postulation_id', $postulation->id) as $certificado)
                                                         <li class="d-flex">
                                                             <a href="{{ $certificado->file }}">{{ $certificado->name }}</a>
                                                             <form action="{{ route('certificados.destroy', $certificado->id) }}" method="POST">
@@ -356,12 +356,12 @@
                                                     @endforeach
                                                 </td>
                                                 <td class="text-center">
-                                                    @if ($detalle->certificados->count() != 0)
-                                                        {{$detalle->certificados->count() * $detalle->puntos}}
+                                                    @if ($detalle->certificados->where('postulation_id', $postulation->id)->count() !== 0)
+                                                        {{$detalle->certificados->where('postulation_id', $postulation->id)->count() * $detalle->puntos}}
                                                     @endif
                                                 </td>
                                                 <td class="text-center">
-                                                    {{$detalle->certificados->sum('puntos')}}
+                                                    {{$detalle->certificados->where('postulation_id', $postulation->id)->sum('puntos')}}
                                                 </td>
                                             @endcan
                                         </tr>
@@ -372,6 +372,7 @@
                     </tbody>
                 </table>
             </div>
+
             {{-- Tabla de calificaciones --}}
             <div>
                 <h4><strong>Tabla de calificaciones</strong></h4>
