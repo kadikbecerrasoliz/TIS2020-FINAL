@@ -404,7 +404,7 @@
                                         <strong>{{$postulationRequerimiento->requerimiento->materia->name}}</strong>
                                     </td>
                                     <td class="text-center">
-                                        <strong>{{$calificacion->created_at}}</strong>
+                                        <strong>{{$calificacion->created_at->format('Y-m-d')}}</strong>
                                     </td>
                                     <td class="text-center">
                                         <strong>{{$postulation->puntaje_certificados}}</strong>
