@@ -29,6 +29,9 @@ class ArchivoController extends Controller
 
     public function store(Request $request)
     {
+        if($request->file('file') === null) {
+            return back()->with('negacion','Debe seleccionar un archivo para el documento');
+        }
         $user = Auth::user();
         $rol = $user->roles->where('name','=','Postulante')->count();
         if ($rol == 1) {

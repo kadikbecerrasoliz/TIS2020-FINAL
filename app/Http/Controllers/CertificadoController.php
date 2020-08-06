@@ -32,6 +32,9 @@ class CertificadoController extends Controller
 
     public function store(Request $request)
     {
+        if($request->file('file') === null) {
+            return back()->with('negacion','Debe seleccionar un archivo para el certificado');
+        }
         $user = Auth::user();
         if (isset($request->merito_id)) {
             $merito = Merito::find($request->merito_id);
