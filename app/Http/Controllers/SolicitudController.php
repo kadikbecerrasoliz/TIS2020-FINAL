@@ -23,6 +23,9 @@ class SolicitudController extends Controller
 
     public function store(Request $request)
     {
+        if($request->file('valorado') === null || $request->file('kardex') === null) {
+            return back()->with('negacion','Debes seleccionar un archivo para el kardex y valorado');
+        }
         $user = Auth::user();
         $acept = Solicitud::where('user_id','=',$user->id)->where('convocatoria_id','=',$request->convocatoria_id)->where('estado','=','2')->count();
         $envia = Solicitud::where('user_id','=',$user->id)->where('convocatoria_id','=',$request->convocatoria_id)->where('estado','=','1')->count();

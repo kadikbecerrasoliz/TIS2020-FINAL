@@ -29,7 +29,7 @@ class CalificacionController extends Controller
         $puntaje_final_porcentual = $puntaje_final * ($porcentajeConocimientos / 100);
 
         $calificacion->puntaje_final = $puntaje_final;
-        $calificacion->puntaje_porcentual = $puntaje_final_porcentual + $puntaje_certificados_porcentual;
+        $calificacion->puntaje_porcentual = (int)$puntaje_final_porcentual + (int)$puntaje_certificados_porcentual;
         $calificacion->postulation_id = $postulation_id;
         $calificacion->postulation_requerimiento_id = $postulationRequerimiento_id;
         $calificacion->save();
@@ -57,7 +57,7 @@ class CalificacionController extends Controller
         $puntaje_final_porcentual = $puntaje_final * ($porcentajeConocimientos / 100);
 
         $calificacion->puntaje_final = $puntaje_final;
-        $calificacion->puntaje_porcentual = $puntaje_final_porcentual + $puntaje_certificados_porcentual;
+        $calificacion->puntaje_porcentual = (int)$puntaje_final_porcentual + (int)$puntaje_certificados_porcentual;
         $calificacion->save();
 
         return redirect()->back()->with('confirmacion', 'La calificacion se ha editado exitosamente.');
